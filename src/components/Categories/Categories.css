@@ -17,9 +17,20 @@
     border-radius: 30px;
 
     cursor: pointer;
+    transition: background 0.2s linear;
+}
+
+.categories-item:hover {
+    background-color: #e2e2e2;
 }
 
 .categories-item.active {
-    background-color: black;
+    background-color: #fe5f1e;
     color: white;
+}
+
+.categories-headers h3 {
+    font-size: 30px;
+    color: white;
+    padding: 40px 0 40px 0;
 }

@@ -57,7 +57,7 @@
 
     min-width: 100px;
     text-align: center;
-    transition: background-color .15s ease-in-out;
+    transition: background 0.2s linear;
 }
 
 .button:hover {
