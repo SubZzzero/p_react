@@ -1,0 +1,25 @@
+.categories-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px
+}
+
+.categories-list {
+    display: flex;
+}
+
+.categories-item {
+    color: rgb(0, 0, 0);
+    background-color: #f9f9f9;
+    padding: 13px 30px;
+    margin-right: 10px;
+    border-radius: 30px;
+
+    cursor: pointer;
+}
+
+.categories-item.active {
+    background-color: black;
+    color: white;
+}
