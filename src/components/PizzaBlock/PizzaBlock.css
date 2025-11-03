@@ -29,6 +29,8 @@
 
 .pizza-block-list {
     display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     justify-content: space-between;
     background-color: #f4f4f4;
     border-radius: 15px;
@@ -51,7 +53,6 @@
 .pizza-block-item.active {
     background-color: #fe5f1e;
     color: #fff;
-    font-weight: 600;
 }
 
 .pizza-block-bottom {
@@ -67,6 +68,21 @@
     color: #333;
 }
 
+.pizza-count {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    margin-left: 10px;
+    border-radius: 50%;
+    background-color: white;
+    padding: 2px;
+
+    text-align: center;
+    user-select: none;
+    color: rgb(0, 0, 0);
+    font-size: 14px;
+}
+
 .button {
     background-color: #fe5f1e;
     color: #fff;
@@ -74,7 +90,7 @@
     border-radius: 10px;
     cursor: pointer;
     font-weight: 600;
-    transition: background 0.2s;
+    transition: background 0.2s linear;
 }
 
 .button:hover {

@@ -1,12 +1,24 @@
-import React, { useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { FiChevronDown } from "react-icons/fi";
 import "./Sort.css";
 
 export default function Sort() {
+    const options = ["popularity", "price", "alphabet"];
+
     const [open, setOpen] = useState(false);
     const [active, setActive] = useState(0);
 
-    const options = ["popularity", "price", "alphabet"];
+    const sortRef = useRef()
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (sortRef.current && !sortRef.current.contains(event.target)) {
+                setOpen(false);
+            }
+        };
+
+        document.addEventListener("click", handleClickOutside);
+        return () => document.removeEventListener("click", handleClickOutside);
+    }, []);
 
     const onSelect = (index) => {
         setActive(index);
@@ -14,7 +26,7 @@ export default function Sort() {
     };
 
     return (
-        <div className="sort">
+        <div className="sort" ref={sortRef}>
             <div className="sort-label" onClick={() => setOpen(!open)}>
                 <FiChevronDown size={16} />
                 <b>Sort by:</b>
@@ -29,6 +41,7 @@ export default function Sort() {
                                 key={index}
                                 className={active === index ? "active" : ""}
                                 onClick={() => onSelect(index)}
+
                             >
                                 {item}
                             </li>

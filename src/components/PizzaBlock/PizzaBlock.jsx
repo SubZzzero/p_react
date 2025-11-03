@@ -5,6 +5,7 @@ import "./PizzaBlock.css";
 export default function PizzaBlock() {
     const [activeType, setActiveType] = useState(0);
     const [activeSize, setActiveSize] = useState(1);
+    const [pizzaCount, setPizzaCount] = useState(0)
 
     const types = ["Thin", "Traditional"];
     const sizes = ["26 cm", "30 cm", "40 cm"];
@@ -45,9 +46,13 @@ export default function PizzaBlock() {
 
             <div className="pizza-block-bottom">
                 <div className="pizza-block-price">from $5.50</div>
-                <div className="button">
+                <div className="button" onClick={() => setPizzaCount(prev => prev + 1)}>
                     <span>Add</span>
+                    {pizzaCount > 0 && (
+                        <span className="pizza-count">{pizzaCount}</span>
+                    )}
                 </div>
+
             </div>
         </div>
     );
