@@ -46,12 +46,12 @@ export default function PizzaBlock() {
 
             <div className="pizza-block-bottom">
                 <div className="pizza-block-price">from $5.50</div>
-                <div className="button" onClick={() => setPizzaCount(prev => prev + 1)}>
+                <button className="button" onClick={() => setPizzaCount(prev => prev + 1)}>
                     <span>Add</span>
                     {pizzaCount > 0 && (
                         <span className="pizza-count">{pizzaCount}</span>
                     )}
-                </div>
+                </button>
 
             </div>
         </div>
