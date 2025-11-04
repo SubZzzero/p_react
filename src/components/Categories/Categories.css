@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 40px
+    margin-top: 15px
 }
 
 .categories-list {
@@ -32,5 +32,12 @@
 .categories-headers h3 {
     font-size: 30px;
     color: white;
-    padding: 40px 0 40px 0;
+    padding: 20px 0 20px 0;
+}
+
+.pizza-block-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 25px 0;
 }

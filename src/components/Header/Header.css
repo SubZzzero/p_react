@@ -4,7 +4,6 @@
     background-size: cover;
     background-repeat: no-repeat;
 
-
 }
 
 .header-inner {
@@ -12,7 +11,7 @@
     align-items: center;
     justify-content: space-between;
 
-    height: 135px;
+    height: 90px;
 
 }
 

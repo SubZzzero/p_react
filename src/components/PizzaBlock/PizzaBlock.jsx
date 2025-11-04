@@ -1,51 +1,50 @@
 import React, { useState } from "react";
-import { FiPlus } from "react-icons/fi"; // плюс
 import "./PizzaBlock.css";
 
-export default function PizzaBlock() {
+export default function PizzaBlock({ name, imageUrl, type, size, price, id }) {
     const [activeType, setActiveType] = useState(0);
     const [activeSize, setActiveSize] = useState(1);
     const [pizzaCount, setPizzaCount] = useState(0)
 
-    const types = ["Thin", "Traditional"];
-    const sizes = ["26 cm", "30 cm", "40 cm"];
-
+    function toCapitalize(text) {
+        return text.charAt(0).toUpperCase() + text.slice(1);
+    }
     return (
         <div className="pizza-block">
-            <h4 className="pizza-block-title">Cheeseburger Pizza</h4>
+            <h4 className="pizza-block-title">{name}</h4>
             <img
                 className="pizza-block-image"
-                src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80"
-                alt="Pizza"
+                src={imageUrl}
+                alt={`pizza ${name} ${id}`}
             />
 
             <div className="pizza-block-selector">
                 <ul className="pizza-block-list">
-                    {types.map((type, index) => (
+                    {type.map((type, index) => (
                         <li
                             key={index}
                             className={`pizza-block-item ${activeType === index ? 'active' : ''}`}
                             onClick={() => setActiveType(index)}
                         >
-                            {type}
+                            {toCapitalize(type)}
                         </li>
                     ))}
                 </ul>
                 <ul className="pizza-block-list">
-                    {sizes.map((size, index) => (
+                    {size.map((size, index) => (
                         <li
                             key={index}
                             className={`pizza-block-item ${activeSize === index ? 'active' : ''}`}
                             onClick={() => setActiveSize(index)}
                         >
-                            {size}
+                            {`${size} cm`}
                         </li>
                     ))}
                 </ul>
             </div>
 
             <div className="pizza-block-bottom">
-                <div className="pizza-block-price">from $5.50</div>
+                <div className="pizza-block-price">from ${price}</div>
                 <button className="button" onClick={() => setPizzaCount(prev => prev + 1)}>
                     <span>Add</span>
                     {pizzaCount > 0 && (
