@@ -4,8 +4,6 @@ import Sort from '../Sort/Sort';
 import PizzaBlock from '../PizzaBlock/PizzaBlock';
 import pizzas from '../../data/pizzas.json';
 
-console.log(pizzas)
-console.log(pizzas)
 export default function Categories(props) {
 
     const categories = ["All", "Meat", "Vegetarian", "Grill", "Spicy", "Closed"];
