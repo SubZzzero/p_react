@@ -25,9 +25,7 @@ export default function Categories(props) {
                         </li>
                     ))}
                 </ul>
-
                 <Sort />
-
             </div>
             <div className="categories-headers">
                 <h3>{categories[activeCategory]}</h3>

@@ -3,8 +3,8 @@ import "./PizzaBlock.css";
 
 export default function PizzaBlock({ name, imageUrl, type, size, price, id }) {
     const [activeType, setActiveType] = useState(0);
-    const [activeSize, setActiveSize] = useState(1);
-    const [pizzaCount, setPizzaCount] = useState(0)
+    const [activeSize, setActiveSize] = useState(0);
+
 
     function toCapitalize(text) {
         return text.charAt(0).toUpperCase() + text.slice(1);
@@ -45,11 +45,8 @@ export default function PizzaBlock({ name, imageUrl, type, size, price, id }) {
 
             <div className="pizza-block-bottom">
                 <div className="pizza-block-price">from ${price}</div>
-                <button className="button" onClick={() => setPizzaCount(prev => prev + 1)}>
+                <button className="button">
                     <span>Add</span>
-                    {pizzaCount > 0 && (
-                        <span className="pizza-count">{pizzaCount}</span>
-                    )}
                 </button>
 
             </div>
