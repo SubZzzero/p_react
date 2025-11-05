@@ -28,7 +28,10 @@ export default function Sort() {
     return (
         <div className="sort" ref={sortRef}>
             <div className="sort-label" onClick={() => setOpen(!open)}>
-                <FiChevronDown size={16} />
+                <FiChevronDown
+                    size={16}
+                    className={open ? "icon rotated" : "icon"}
+                />
                 <b>Sort by:</b>
                 <span>{options[active]}</span>
             </div>

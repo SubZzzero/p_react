@@ -45,3 +45,11 @@
 .sort-popup li.active {
     color: #fe5f1e;
 }
+
+.icon {
+    transition: transform 0.2s ease;
+}
+
+.icon.rotated {
+    transform: rotate(180deg);
+}
