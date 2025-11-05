@@ -9,7 +9,7 @@ export default function Header() {
         <header
             className="header"
             style={{
-                backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0) 30%, rgba(0,0,0,0.4)), url("/img/main_bg.jpg")`
+                backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0) 30%, rgba(0,0,0,0.4)), url("/img/main_bg-1.avif")`
             }}
         >
             <div className="container">
