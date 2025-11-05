@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "./Categories.css"
-import Sort from '../Sort/Sort';
-import PizzaBlock from '../PizzaBlock/PizzaBlock';
+import Sort from '../Sort';
+import PizzaBlock from '../PizzaBlock';
 
 
 export default function Categories() {

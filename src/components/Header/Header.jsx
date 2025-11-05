@@ -2,7 +2,7 @@ import React from 'react';
 import "./Header.css"
 import { FaSearch } from "react-icons/fa";
 import { PiShoppingCartSimple } from "react-icons/pi";
-import Categories from "../Categories/Categories";
+import Categories from "../Categories";
 
 export default function Header() {
     return (
