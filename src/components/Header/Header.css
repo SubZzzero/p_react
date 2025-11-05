@@ -1,12 +1,3 @@
-.header {
-    min-height: 100vh;
-    height: auto;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-
-}
-
 .header-inner {
     display: flex;
     align-items: center;

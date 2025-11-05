@@ -29,28 +29,30 @@ export default function Categories() {
 
     return (
         <div className="categories">
-            <div className="categories-inner">
-                <ul className="categories-list">
-                    {categories.map((item, index) => (
-                        <li key={index}
-                            className={`categories-item ${activeCategory === index ? "active" : ""}`}
-                            onClick={() => setActiveCategory(index)} >
-                            {item}
-                        </li>
-                    ))}
-                </ul>
-                <Sort />
-            </div>
-            <div className="categories-headers">
-                <h3>{categories[activeCategory]}</h3>
-            </div>
-            <div className='pizza-block-wrapper'>
-                {isLoading
-                    // FAKE RENDER PIZZA
-                    ? [...new Array(10)].map((_, index) => <Skeleton key={index} />)
-                    // RENDER PIZZA
-                    : items.map((obj) => <PizzaBlock key={obj.id} {...obj} />)}
-            </div>
+            <div className='container'>
+                <div className="categories-inner">
+                    <ul className="categories-list">
+                        {categories.map((item, index) => (
+                            <li key={index}
+                                className={`categories-item ${activeCategory === index ? "active" : ""}`}
+                                onClick={() => setActiveCategory(index)} >
+                                {item}
+                            </li>
+                        ))}
+                    </ul>
+                    <Sort />
+                </div>
+                <div className="categories-headers">
+                    <h3>{categories[activeCategory]}</h3>
+                </div>
+                <div className='pizza-block-wrapper'>
+                    {isLoading
+                        // FAKE RENDER PIZZA
+                        ? [...new Array(10)].map((_, index) => <Skeleton key={index} />)
+                        // RENDER PIZZA
+                        : items.map((obj) => <PizzaBlock key={obj.id} {...obj} />)}
+                </div>
+            </div >
         </div>
 
     );
