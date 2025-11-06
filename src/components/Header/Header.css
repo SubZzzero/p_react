@@ -66,3 +66,13 @@
     margin: 0 14px;
     width: 1px;
 }
+
+@media (max-width: 546px) {
+    .header-inner {
+        flex-wrap: wrap;
+    }
+
+    .search-wrapper {
+        display: none;
+    }
+}
