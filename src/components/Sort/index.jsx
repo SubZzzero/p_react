@@ -2,13 +2,22 @@ import React, { useRef, useState, useEffect } from 'react';
 import { FiChevronDown } from "react-icons/fi";
 import "./Sort.css";
 
-export default function Sort() {
-    const options = ["popularity", "price", "alphabet"];
+export default function Sort({ sortBy, setSortBy }) {
+    const options = [
+        { label: "popularity", sort: "rating" },
+        { label: "price", sort: "price" },
+        { label: "alphabet", sort: "name" }
+    ];
+
+    // options.map((items) => {
+    //     return (console.log(items.label))
+    // })
 
     const [open, setOpen] = useState(false);
     const [active, setActive] = useState(0);
 
-    const sortRef = useRef()
+    const sortRef = useRef();
+
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (sortRef.current && !sortRef.current.contains(event.target)) {
@@ -22,9 +31,10 @@ export default function Sort() {
 
     const onSelect = (index) => {
         setActive(index);
+        setSortBy(options[index].sort);
         setOpen(false);
     };
-    console.log(options[active])
+
     return (
         <div className="sort" ref={sortRef}>
             <div className="sort-label" onClick={() => setOpen(!open)}>
@@ -33,7 +43,7 @@ export default function Sort() {
                     className={open ? "icon rotated" : "icon"}
                 />
                 <b>Sort by:</b>
-                <span>{options[active]}</span>
+                <span>{options[active].label}</span>
             </div>
 
             {open && (
@@ -42,11 +52,11 @@ export default function Sort() {
                         {options.map((item, index) => (
                             <li
                                 key={index}
-                                className={active === index ? "active" : ""}
+                                className={sortBy === item.sort ? "active" : ""}
                                 onClick={() => onSelect(index)}
-
                             >
-                                {item}
+                                {item.label}
+                                {console.log(index)}
                             </li>
                         ))}
                     </ul>

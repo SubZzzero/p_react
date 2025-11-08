@@ -14,6 +14,8 @@ export default function Home() {
     const [items, setItems] = useState([]); //categories items
     const [isLoading, setIsLoading] = useState(true); //skeleton
 
+    const [sortBy, setSortBy] = useState("popularity")
+
 
     const [activeCategory, setActiveCategory] = useState(0);
 
@@ -24,8 +26,8 @@ export default function Home() {
 
         const apiUrl =
             category === "All"
-                ? URL
-                : URL + `filter=${category}`;
+                ? `${URL}sortBy=${sortBy}`
+                : `${URL}filter=${category}&sortBy=${sortBy}`;
 
         fetch(apiUrl)
             .then(res => res.json())
@@ -34,10 +36,8 @@ export default function Home() {
                 setIsLoading(false);
             })
             .catch(() => setIsLoading(false));
-    }, [activeCategory]);
+    }, [activeCategory, sortBy]);
 
-
-    console.log(categories[activeCategory] + "console")
 
     return (
         <div className="categories">
@@ -50,7 +50,7 @@ export default function Home() {
                         setActiveCategory={setActiveCategory}
                     />
 
-                    <Sort />
+                    <Sort sortBy={sortBy} setSortBy={setSortBy} />
                 </div>
 
                 <div className="categories-headers">
