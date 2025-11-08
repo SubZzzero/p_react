@@ -5,23 +5,39 @@ import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import "../components/CategoriesList/CategoriesList.css";
 
+
+const categories = ["All", "Meat", "Vegetarian", "Grill", "Spicy", "Closed"];
+
 export default function Home() {
-    const URL = "https://690b168a6ad3beba00f368a7.mockapi.io/items"
-    const [items, setItems] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const URL = "https://690b168a6ad3beba00f368a7.mockapi.io/items?"
+
+    const [items, setItems] = useState([]); //categories items
+    const [isLoading, setIsLoading] = useState(true); //skeleton
+
+
+    const [activeCategory, setActiveCategory] = useState(0);
 
     useEffect(() => {
-        fetch(URL)
+        setIsLoading(true);
+
+        const category = categories[activeCategory];
+
+        const apiUrl =
+            category === "All"
+                ? URL
+                : URL + `filter=${category}`;
+
+        fetch(apiUrl)
             .then(res => res.json())
             .then(data => {
                 setItems(data);
                 setIsLoading(false);
             })
             .catch(() => setIsLoading(false));
-    }, []);
+    }, [activeCategory]);
 
-    const categories = ["All", "Meat", "Vegetarian", "Grill", "Spicy", "Closed"];
-    const [activeCategory, setActiveCategory] = useState(0);
+
+    console.log(categories[activeCategory] + "console")
 
     return (
         <div className="categories">

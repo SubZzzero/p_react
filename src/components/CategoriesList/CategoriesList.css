@@ -36,13 +36,10 @@
 }
 
 .pizza-block-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
     padding-bottom: 15px;
-
-    gap: 20px 0;
 }
 
 

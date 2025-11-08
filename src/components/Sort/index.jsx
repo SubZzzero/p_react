@@ -24,7 +24,7 @@ export default function Sort() {
         setActive(index);
         setOpen(false);
     };
-
+    console.log(options[active])
     return (
         <div className="sort" ref={sortRef}>
             <div className="sort-label" onClick={() => setOpen(!open)}>
