@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./PizzaBlock.css";
 
-export default function PizzaBlock({ name, imageUrl, type, size, price, id }) {
+export default function PizzaBlock({ name, imageUrl, type, size, price, id, rating }) {
     const [activeType, setActiveType] = useState(0);
     const [activeSize, setActiveSize] = useState(0);
 
@@ -9,9 +9,14 @@ export default function PizzaBlock({ name, imageUrl, type, size, price, id }) {
     function toCapitalize(text) {
         return text.charAt(0).toUpperCase() + text.slice(1);
     }
+
     return (
         <div className="pizza-block">
-            <h4 className="pizza-block-title">{name}</h4>
+            <div className="pizza-block-up-wrapper">
+                <h4 className="pizza-block-title">{name}
+                </h4>
+                <span className="pizza-block-rating">{rating}</span>
+            </div>
             <img
                 className="pizza-block-image"
                 src={imageUrl}

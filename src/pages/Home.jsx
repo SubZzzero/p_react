@@ -13,11 +13,10 @@ export default function Home() {
 
     const [items, setItems] = useState([]); //categories items
     const [isLoading, setIsLoading] = useState(true); //skeleton
-
-    const [sortBy, setSortBy] = useState("popularity")
-
+    const [sortBy, setSortBy] = useState({ label: "popularity(DESC)", sort: "rating", order: "desc" }) //sorting popup
 
     const [activeCategory, setActiveCategory] = useState(0);
+
 
     useEffect(() => {
         setIsLoading(true);
@@ -26,8 +25,8 @@ export default function Home() {
 
         const apiUrl =
             category === "All"
-                ? `${URL}sortBy=${sortBy}`
-                : `${URL}filter=${category}&sortBy=${sortBy}`;
+                ? `${URL}sortby=${sortBy.sort}&order=${sortBy.order}`
+                : `${URL}filter=${category}&sortby=${sortBy.sort}&order=${sortBy.order}`;
 
         fetch(apiUrl)
             .then(res => res.json())
@@ -60,7 +59,8 @@ export default function Home() {
                 <div className='pizza-block-wrapper'>
                     {isLoading
                         ? [...new Array(10)].map((_, index) => <Skeleton key={index} />)
-                        : items.map((obj) => <PizzaBlock key={obj.id} {...obj} />)}
+                        : items.map((obj) => <PizzaBlock key={obj.id} {...obj} />)
+                    }
                 </div>
             </div>
         </div>

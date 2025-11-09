@@ -4,9 +4,11 @@ import "./Sort.css";
 
 export default function Sort({ sortBy, setSortBy }) {
     const options = [
-        { label: "popularity", sort: "rating" },
-        { label: "price", sort: "price" },
-        { label: "alphabet", sort: "name" }
+        { label: "popularity(DESC)", sort: "rating", order: "desc" },
+        { label: "popularity(ASC)", sort: "rating", order: "asc" },
+
+        { label: "price(DESC)", sort: "price", order: "desc" },
+        { label: "alphabet", sort: "name", order: "asc" }
     ];
 
     // options.map((items) => {
@@ -31,8 +33,9 @@ export default function Sort({ sortBy, setSortBy }) {
 
     const onSelect = (index) => {
         setActive(index);
-        setSortBy(options[index].sort);
+        setSortBy(options[index]);
         setOpen(false);
+        console.log(index)
     };
 
     return (
@@ -52,11 +55,12 @@ export default function Sort({ sortBy, setSortBy }) {
                         {options.map((item, index) => (
                             <li
                                 key={index}
-                                className={sortBy === item.sort ? "active" : ""}
+                                className={sortBy.sort === item.sort && sortBy.order === item.order ? "active" : ""}
                                 onClick={() => onSelect(index)}
+
                             >
                                 {item.label}
-                                {console.log(index)}
+
                             </li>
                         ))}
                     </ul>

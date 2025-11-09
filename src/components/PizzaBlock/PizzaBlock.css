@@ -7,13 +7,26 @@
 
 }
 
+.pizza-block-up-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.pizza-block-rating {
+    background-color: #19e012;
+}
+
+
 .pizza-block-title {
     color: #333;
     font-weight: 700;
     font-size: 22px;
-    margin-bottom: 15px;
     text-align: center;
 }
+
+
 
 .pizza-block-image {
     width: 100%;
