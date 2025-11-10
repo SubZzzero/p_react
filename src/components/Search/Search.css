@@ -1,0 +1,44 @@
+.search-wrapper {
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: rgb(145, 145, 145);
+    font-size: 18px;
+}
+
+.search-clear-icon {
+    position: absolute;
+
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    color: rgb(145, 145, 145);
+    font-size: 18px;
+}
+
+.search-clear-icon:hover {
+    color: white;
+    cursor: pointer;
+}
+
+
+.search-pizza-input {
+    font-size: 16px;
+    padding: 12px 20px 12px 42px;
+    color: white;
+    border-radius: 10px;
+    border: 1px solid rgb(145, 145, 145);
+}
+
+.search-pizza-input:focus {
+
+    border: 1px solid white;
+}

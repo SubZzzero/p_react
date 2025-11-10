@@ -4,11 +4,12 @@ import "./Sort.css";
 
 export default function Sort({ sortBy, setSortBy }) {
     const options = [
-        { label: "popularity(DESC)", sort: "rating", order: "desc" },
-        { label: "popularity(ASC)", sort: "rating", order: "asc" },
+        { label: "Popularity: highest first", sort: "rating", order: "desc" },
+        { label: "Popularity: lowest first", sort: "rating", order: "asc" },
 
-        { label: "price(DESC)", sort: "price", order: "desc" },
-        { label: "alphabet", sort: "name", order: "asc" }
+        { label: "Price: highest first", sort: "price", order: "desc" },
+        { label: "Price: lowest first", sort: "price", order: "asc" },
+        { label: "Alphabet", sort: "name", order: "asc" }
     ];
 
     // options.map((items) => {

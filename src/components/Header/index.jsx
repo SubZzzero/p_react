@@ -1,10 +1,13 @@
 import React from 'react';
 import "./Header.css"
+import Search from '../Search';
 import { Link } from 'react-router-dom';
-import { FaSearch } from "react-icons/fa";
 import { PiShoppingCartSimple } from "react-icons/pi";
 
-export default function Header() {
+
+
+export default function Header({ inputSearch, setInputSearch }) {
+
     return (
         <header
             className="header"
@@ -13,18 +16,15 @@ export default function Header() {
                 <div className="header-inner">
 
                     <Link className="header-logo" to="/">
-                        <img className="logo" src="/img/logo.png" alt="logo" />
+                        <img
+                            onClick={() => window.location.href = "/"}
+                            style={{ cursor: 'pointer' }}
+                            className="logo"
+                            src="/img/logo.png"
+                            alt="logo" />
                     </Link>
 
-                    <div className="search-wrapper">
-                        <FaSearch className="search-icon" />
-                        <input
-                            className="search-pizza-input"
-                            type="text"
-                            placeholder="Search pizza..."
-                        />
-                    </div>
-
+                    <Search inputSearch={inputSearch} setInputSearch={setInputSearch} />
 
                     <div className="button-wrapper">
                         <Link className="button button-cart" to="/cart">
