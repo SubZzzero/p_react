@@ -1,0 +1,39 @@
+.pagination {
+    display: flex;
+    position: absolute;
+
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    gap: 6px;
+    justify-content: center;
+
+    margin: 10px 0 10px 0;
+}
+
+.page-item {
+    cursor: pointer;
+}
+
+.page-link {
+    display: block;
+    padding: 8px 12px;
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 14px;
+    transition: 0.2s ease;
+}
+
+.page-link:hover {
+    background-color: #f4f4f4;
+}
+
+
+.active .page-link {
+    background-color: #ff6b00;
+    border-color: #ff6b00;
+    color: white;
+}

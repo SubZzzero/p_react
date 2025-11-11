@@ -42,7 +42,7 @@ export default function CartBlock() {
                         <button className="remove-item-btn">Remove</button>
                     </div>
 
-                    {/* TOTAL */}
+
                     <div className="cart-total">
                         <p>Total: <span>$12.99</span></p>
 

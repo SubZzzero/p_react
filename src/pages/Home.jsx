@@ -3,6 +3,7 @@ import CategoriesList from '../components/CategoriesList';
 import Sort from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
+import Pagination from '../components/Pagination';
 import "../components/CategoriesList/CategoriesList.css";
 
 
@@ -14,7 +15,7 @@ export default function Home({ inputSearch }) {
     const [items, setItems] = useState([]); //categories items
     const [isLoading, setIsLoading] = useState(true); //skeleton
     const [sortBy, setSortBy] = useState({ label: "Popularity: highest first", sort: "rating", order: "desc" }) //sorting popup
-
+    const [paginationPage, setPaginationPage] = useState(1)
     const [activeCategory, setActiveCategory] = useState(0);
 
     useEffect(() => {
@@ -25,7 +26,7 @@ export default function Home({ inputSearch }) {
 
         const apiUrl =
             category === "All"
-                ? `${URL}sortby=${sortBy.sort}&order=${sortBy.order}&${search}`
+                ? `${URL}page=${paginationPage}&limit=10&sortby=${sortBy.sort}&order=${sortBy.order}&${search}`
                 : `${URL}filter=${category}&sortby=${sortBy.sort}&order=${sortBy.order}&${search}`;
 
         fetch(apiUrl)
@@ -36,7 +37,7 @@ export default function Home({ inputSearch }) {
                 setIsLoading(false);
             })
             .catch(() => setIsLoading(false));
-    }, [activeCategory, sortBy, inputSearch]);
+    }, [activeCategory, sortBy, inputSearch, paginationPage]);
 
     const pizzaBlocks = items
         // .filter(obj => obj.name.toLowerCase().includes(inputSearch.toLowerCase()))
@@ -69,7 +70,8 @@ export default function Home({ inputSearch }) {
                         : pizzaBlocks
                     }
                 </div>
+                <Pagination onChangePage={numberPage => setPaginationPage(numberPage)} />
             </div>
-        </div>
+        </div >
     );
 }
