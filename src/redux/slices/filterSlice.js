@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-    list: ["All", "Meat", "Vegetarian", "Grill", "Spicy", "Closed"],
+    categories: ["All", "Meat", "Vegetarian", "Grill", "Spicy", "Closed"],
     activeCategory: 0,
 
     sort: {

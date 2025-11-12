@@ -4,8 +4,7 @@ import Sort from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
-import { useSelector, useDispatch } from 'react-redux';
-import { setActiveCategory, setSort } from '../redux/slices/filterSlice';
+import { useSelector } from 'react-redux';
 import { SearchContext } from '../App';
 import "../components/CategoriesList/CategoriesList.css";
 
@@ -16,9 +15,7 @@ export default function Home() {
     const [paginationPage, setPaginationPage] = useState(1);
     const { inputSearch } = useContext(SearchContext);
 
-    const dispatch = useDispatch();
-    const { list: categories, activeCategory, sort } = useSelector(state => state.filters);
-
+    const { categories, activeCategory, sort } = useSelector(state => state.filters);
 
     useEffect(() => {
         setIsLoading(true);
@@ -27,7 +24,7 @@ export default function Home() {
 
         const apiUrl =
             category === "All"
-                ? `${URL}page=${paginationPage}&limit=10&sortby=${sort.sort}&order=${sort.order}&${search}`
+                ? `${URL}page=${paginationPage}&limit=5&sortby=${sort.sort}&order=${sort.order}&${search}`
                 : `${URL}filter=${category}&sortby=${sort.sort}&order=${sort.order}&${search}`;
 
         fetch(apiUrl)
@@ -40,18 +37,14 @@ export default function Home() {
     }, [categories, activeCategory, sort, inputSearch, paginationPage]);
 
     const pizzaBlocks = items.map(obj => <PizzaBlock key={obj.id} {...obj} />);
-    const skeletons = [...new Array(10)].map((_, index) => <Skeleton key={index} />);
+    const skeletons = [...new Array(5)].map((_, index) => <Skeleton key={index} />);
 
     return (
         <div className="categories">
             <div className="container">
                 <div className="categories-inner">
-                    <CategoriesList
-                        categories={categories}
-                        activeCategory={activeCategory}
-                        setActiveCategory={index => dispatch(setActiveCategory(index))}
-                    />
-                    <Sort sortBy={sort} setSortBy={obj => dispatch(setSort(obj))} />
+                    <CategoriesList />
+                    <Sort />
                 </div>
 
                 <div className="categories-headers">

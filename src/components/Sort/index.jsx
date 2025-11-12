@@ -1,22 +1,23 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setSort } from "../../redux/slices/filterSlice";
 import { FiChevronDown } from "react-icons/fi";
 import "./Sort.css";
 
-export default function Sort({ sortBy, setSortBy }) {
+export default function Sort() {
+    const dispatch = useDispatch();
+    const sort = useSelector(state => state.filters.sort);
+
     const options = [
         { label: "Popularity: highest first", sort: "rating", order: "desc" },
         { label: "Popularity: lowest first", sort: "rating", order: "asc" },
         { label: "Price: highest first", sort: "price", order: "desc" },
         { label: "Price: lowest first", sort: "price", order: "asc" },
-        { label: "Alphabet", sort: "name", order: "asc" }
+        { label: "Alphabet", sort: "name", order: "asc" },
     ];
 
     const [open, setOpen] = useState(false);
     const sortRef = useRef();
-
-    const activeIndex = options.findIndex(
-        (item) => item.sort === sortBy.sort && item.order === sortBy.order
-    );
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -24,34 +25,34 @@ export default function Sort({ sortBy, setSortBy }) {
                 setOpen(false);
             }
         };
+
         document.addEventListener("click", handleClickOutside);
         return () => document.removeEventListener("click", handleClickOutside);
     }, []);
 
-    const onSelect = (index) => {
-        setSortBy(options[index]);
+    const onSelect = (option) => {
+        dispatch(setSort(option));
         setOpen(false);
     };
 
     return (
         <div className="sort" ref={sortRef}>
             <div className="sort-label" onClick={() => setOpen(!open)}>
-                <FiChevronDown
-                    size={16}
-                    className={open ? "icon rotated" : "icon"}
-                />
+                <FiChevronDown size={16} className={open ? "icon rotated" : "icon"} />
                 <b>Sort by:</b>
-                <span>{options[activeIndex]?.label || "Select"}</span>
+                <span>{sort.label}</span>
             </div>
 
             {open && (
                 <div className="sort-popup">
                     <ul>
-                        {options.map((item, index) => (
+                        {options.map((item) => (
                             <li
-                                key={index}
-                                className={sortBy.sort === item.sort && sortBy.order === item.order ? "active" : ""}
-                                onClick={() => onSelect(index)}
+                                key={item.label}
+                                className={
+                                    sort.sort === item.sort && sort.order === item.order ? "active" : ""
+                                }
+                                onClick={() => onSelect(item)}
                             >
                                 {item.label}
                             </li>
