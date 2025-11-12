@@ -6,20 +6,17 @@ export default function Sort({ sortBy, setSortBy }) {
     const options = [
         { label: "Popularity: highest first", sort: "rating", order: "desc" },
         { label: "Popularity: lowest first", sort: "rating", order: "asc" },
-
         { label: "Price: highest first", sort: "price", order: "desc" },
         { label: "Price: lowest first", sort: "price", order: "asc" },
         { label: "Alphabet", sort: "name", order: "asc" }
     ];
 
-    // options.map((items) => {
-    //     return (console.log(items.label))
-    // })
-
     const [open, setOpen] = useState(false);
-    const [active, setActive] = useState(0);
-
     const sortRef = useRef();
+
+    const activeIndex = options.findIndex(
+        (item) => item.sort === sortBy.sort && item.order === sortBy.order
+    );
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -27,16 +24,13 @@ export default function Sort({ sortBy, setSortBy }) {
                 setOpen(false);
             }
         };
-
         document.addEventListener("click", handleClickOutside);
         return () => document.removeEventListener("click", handleClickOutside);
     }, []);
 
     const onSelect = (index) => {
-        setActive(index);
         setSortBy(options[index]);
         setOpen(false);
-        console.log(index)
     };
 
     return (
@@ -47,7 +41,7 @@ export default function Sort({ sortBy, setSortBy }) {
                     className={open ? "icon rotated" : "icon"}
                 />
                 <b>Sort by:</b>
-                <span>{options[active].label}</span>
+                <span>{options[activeIndex]?.label || "Select"}</span>
             </div>
 
             {open && (
@@ -58,10 +52,8 @@ export default function Sort({ sortBy, setSortBy }) {
                                 key={index}
                                 className={sortBy.sort === item.sort && sortBy.order === item.order ? "active" : ""}
                                 onClick={() => onSelect(index)}
-
                             >
                                 {item.label}
-
                             </li>
                         ))}
                     </ul>

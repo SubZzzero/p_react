@@ -6,7 +6,7 @@ import { PiShoppingCartSimple } from "react-icons/pi";
 
 
 
-export default function Header({ inputSearch, setInputSearch }) {
+export default function Header() {
 
     return (
         <header
@@ -24,7 +24,7 @@ export default function Header({ inputSearch, setInputSearch }) {
                             alt="logo" />
                     </Link>
 
-                    <Search inputSearch={inputSearch} setInputSearch={setInputSearch} />
+                    <Search />
 
                     <div className="button-wrapper">
                         <Link className="button button-cart" to="/cart">

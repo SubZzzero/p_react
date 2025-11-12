@@ -1,10 +1,14 @@
 import { FaSearch } from "react-icons/fa";
 import { MdOutlineClear } from "react-icons/md";
+import { SearchContext } from "../../App";
+import React, { useContext } from 'react';
 import "./Search.css"
 
-import React from 'react'
 
-function Search({ inputSearch, setInputSearch }) {
+
+function Search() {
+
+    const { inputSearch, setInputSearch } = useContext(SearchContext);
     return (
         <div>
             <div className="search-wrapper">

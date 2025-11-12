@@ -32,15 +32,18 @@
 .categories-headers h3 {
     font-size: 30px;
     color: white;
-    padding: 20px 0 0 0;
+    padding: 10px 0 10px 0;
 }
 
 .pizza-block-wrapper {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-    padding-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 10px 40px;
+    justify-content: start;
+    margin-bottom: 10px;
 }
+
 
 
 @media (max-width: 1024px) {
