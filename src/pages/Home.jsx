@@ -5,7 +5,8 @@ import Sort from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
-import { useSelector } from 'react-redux';
+import { setCurrentPage } from '../redux/slices/filterSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import { SearchContext } from '../App';
 import "../components/CategoriesList/CategoriesList.css";
 
@@ -13,10 +14,14 @@ export default function Home() {
     const URL = "https://690b168a6ad3beba00f368a7.mockapi.io/items?";
     const [items, setItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [paginationPage, setPaginationPage] = useState(1);
+
     const { inputSearch } = useContext(SearchContext);
 
-    const { categories, activeCategory, sort } = useSelector(state => state.filters);
+    const dispatch = useDispatch();
+    const { categories, activeCategory, sort, currentPage } = useSelector(state => state.filters);
+    const onChangePage = (pageNumber) => {
+        dispatch(setCurrentPage(pageNumber))
+    }
 
     useEffect(() => {
         setIsLoading(true);
@@ -25,7 +30,7 @@ export default function Home() {
 
         const apiUrl =
             category === "All"
-                ? `${URL}page=${paginationPage}&limit=10&sortby=${sort.sort}&order=${sort.order}&${search}`
+                ? `${URL}page=${currentPage}&limit=10&sortby=${sort.sort}&order=${sort.order}&${search}`
                 : `${URL}filter=${category}&sortby=${sort.sort}&order=${sort.order}&${search}`;
 
 
@@ -36,11 +41,12 @@ export default function Home() {
             })
             .catch(() => setIsLoading(false));
 
-    }, [categories, activeCategory, sort, inputSearch, paginationPage]);
+    }, [categories, activeCategory, sort, inputSearch, currentPage]);
 
     const pizzaBlocks = items.map(obj => <PizzaBlock key={obj.id} {...obj} />);
     const skeletons = [...new Array(5)].map((_, index) => <Skeleton key={index} />);
     const LIMIT = 10;  //limit for pagination hard
+
     return (
         <div className="categories">
             <div className="container">
@@ -58,7 +64,7 @@ export default function Home() {
                 </div>
 
                 {pizzaBlocks.length >= LIMIT && (
-                    <Pagination onChangePage={numberPage => setPaginationPage(numberPage)} />
+                    <Pagination currentPage={currentPage} onChangePage={onChangePage} />
                 )}
             </div>
         </div>
