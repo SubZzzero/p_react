@@ -16,7 +16,7 @@ const categoriesSlice = createSlice({
     reducers: {
         setActiveCategory(state, action) {
             state.activeCategory = action.payload;
-            console.log(state.activeCategory)
+
         },
         setSort(state, action) {
             state.sort = action.payload;

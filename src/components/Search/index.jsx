@@ -1,35 +1,59 @@
+import React, { useContext, useRef, useState } from 'react';
+import { useDebouncedCallback } from 'use-debounce';
+
 import { FaSearch } from "react-icons/fa";
 import { MdOutlineClear } from "react-icons/md";
 import { SearchContext } from "../../App";
-import React, { useContext } from 'react';
+
 import "./Search.css"
-
-
 
 function Search() {
 
-    const { inputSearch, setInputSearch } = useContext(SearchContext);
+    const focusInput = useRef(null);
+    const { setInputSearch } = useContext(SearchContext);
+    const [localValue, setLocalValue] = useState("");
+
+    const debouncedSetSearch = useDebouncedCallback(
+        (value) => {
+            setInputSearch(value);
+        },
+        250
+    );
+
+    const onChangeInput = (event) => {
+        const val = event.target.value;
+        setLocalValue(val);
+        debouncedSetSearch(val);
+    };
+
+    const clearInputFocusInput = () => {
+        setLocalValue("");
+        setInputSearch("");
+        focusInput.current.focus();
+        debouncedSetSearch.cancel();
+    };
+
     return (
         <div>
             <div className="search-wrapper">
                 <FaSearch className="search-icon" />
                 <input
-                    onChange={event => setInputSearch(event.target.value)}
-                    value={inputSearch}
+                    ref={focusInput}
+                    onChange={onChangeInput}
+                    value={localValue}
                     className="search-pizza-input"
                     type="text"
                     placeholder="Search pizza..."
                 />
-                {inputSearch && (
+                {localValue && (
                     <MdOutlineClear
                         className="search-clear-icon"
-                        onClick={() => setInputSearch("")}
+                        onClick={clearInputFocusInput}
                     />
                 )}
-
             </div>
         </div>
-    )
+    );
 }
 
 export default Search;

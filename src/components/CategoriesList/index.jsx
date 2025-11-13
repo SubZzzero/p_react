@@ -7,6 +7,7 @@ export default function CategoriesList() {
     const dispatch = useDispatch();
     const { categories, activeCategory } = useSelector(state => state.filters);
 
+
     return (
         <ul className="categories-list">
             {categories.map((item, index) => (

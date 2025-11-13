@@ -8,6 +8,8 @@ export default function Sort() {
     const dispatch = useDispatch();
     const sort = useSelector(state => state.filters.sort);
 
+
+
     const options = [
         { label: "Popularity: highest first", sort: "rating", order: "desc" },
         { label: "Popularity: lowest first", sort: "rating", order: "asc" },

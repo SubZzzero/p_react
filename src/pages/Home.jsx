@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import axios from 'axios';
 import CategoriesList from '../components/CategoriesList';
 import Sort from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
@@ -24,21 +25,22 @@ export default function Home() {
 
         const apiUrl =
             category === "All"
-                ? `${URL}page=${paginationPage}&limit=5&sortby=${sort.sort}&order=${sort.order}&${search}`
+                ? `${URL}page=${paginationPage}&limit=10&sortby=${sort.sort}&order=${sort.order}&${search}`
                 : `${URL}filter=${category}&sortby=${sort.sort}&order=${sort.order}&${search}`;
 
-        fetch(apiUrl)
-            .then(res => res.json())
-            .then(data => {
-                setItems(Array.isArray(data) ? data : []);
+
+        axios.get(apiUrl)
+            .then(response => {
+                setItems(Array.isArray(response.data) ? response.data : []);
                 setIsLoading(false);
             })
             .catch(() => setIsLoading(false));
+
     }, [categories, activeCategory, sort, inputSearch, paginationPage]);
 
     const pizzaBlocks = items.map(obj => <PizzaBlock key={obj.id} {...obj} />);
     const skeletons = [...new Array(5)].map((_, index) => <Skeleton key={index} />);
-
+    const LIMIT = 10;  //limit for pagination hard
     return (
         <div className="categories">
             <div className="container">
@@ -55,7 +57,7 @@ export default function Home() {
                     {isLoading ? skeletons : pizzaBlocks}
                 </div>
 
-                {activeCategory === 0 && (
+                {pizzaBlocks.length >= LIMIT && (
                     <Pagination onChangePage={numberPage => setPaginationPage(numberPage)} />
                 )}
             </div>

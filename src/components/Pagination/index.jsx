@@ -11,8 +11,8 @@ export default function Pagination({ onChangePage }) {
                 breakLabel="..."
                 nextLabel=">"
                 onPageChange={(event) => onChangePage(event.selected + 1)}
-                pageRangeDisplayed={5}
-                pageCount={4}
+                pageRangeDisplayed={10}
+                pageCount={2}
                 previousLabel="<"
                 renderOnZeroPageCount={null}
 

@@ -1,22 +1,22 @@
 body {
-  /* height: 100vh; */
+  min-height: 100vh;
 
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
-  background-color: black;
+  /* background-color: black; */
 
-  /* background-image:
+  background-image:
     linear-gradient(to bottom,
       rgba(0, 0, 0, 1),
       rgba(0, 0, 0, 0) 30%,
       rgba(0, 0, 0, 0.4)),
-    url("/public/img/main_bg-1.avif"); */
+    url("/public/img/main_bg-1.avif");
 
-  /* background-size: cover;
+  background-size: cover;
   background-repeat: no-repeat;
-  background-position: center; */
+  background-position: center;
 
 }
 
