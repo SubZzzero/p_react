@@ -24,6 +24,12 @@ export default function Home() {
     }
 
     useEffect(() => {
+        dispatch(setCurrentPage(1))
+    }, [activeCategory, sort, inputSearch])
+
+
+
+    useEffect(() => {
         setIsLoading(true);
         const category = categories[activeCategory];
         const search = inputSearch ? `&search=${inputSearch}` : ``;

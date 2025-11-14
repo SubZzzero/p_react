@@ -5,12 +5,18 @@ import "./Pagination.css"
 
 
 export default function Pagination({ currentPage, onChangePage }) {
+
+    const onChangePageLocal = (event) => {
+        window.scrollTo(0, 0);
+        onChangePage(event.selected + 1);
+    };
+
     return (
         <>
             <ReactPaginate
                 breakLabel="..."
                 nextLabel=">"
-                onPageChange={(event) => onChangePage(event.selected + 1)}
+                onPageChange={onChangePageLocal}
                 pageRangeDisplayed={10}
                 pageCount={2}
                 previousLabel="<"
