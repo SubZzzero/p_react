@@ -26,12 +26,13 @@ export default function Home() {
     useEffect(() => {
         setIsLoading(true);
         const category = categories[activeCategory];
-        const search = inputSearch ? `search=${inputSearch}` : ``;
+        const search = inputSearch ? `&search=${inputSearch}` : ``;
 
         const apiUrl =
             category === "All"
-                ? `${URL}page=${currentPage}&limit=10&sortby=${sort.sort}&order=${sort.order}&${search}`
-                : `${URL}filter=${category}&sortby=${sort.sort}&order=${sort.order}&${search}`;
+                ? `${URL}page=${currentPage}&limit=10&sortBy=${sort.sort}&order=${sort.order}${search}`
+                : `${URL}filter=${category}&sortBy=${sort.sort}&order=${sort.order}`;
+
 
 
         axios.get(apiUrl)
@@ -39,12 +40,15 @@ export default function Home() {
                 setItems(Array.isArray(response.data) ? response.data : []);
                 setIsLoading(false);
             })
-            .catch(() => setIsLoading(false));
+            .catch(() => {
+                setItems([]);
+                setIsLoading(false);
+            });
 
     }, [categories, activeCategory, sort, inputSearch, currentPage]);
 
     const pizzaBlocks = items.map(obj => <PizzaBlock key={obj.id} {...obj} />);
-    const skeletons = [...new Array(5)].map((_, index) => <Skeleton key={index} />);
+    const skeletons = [...new Array(10)].map((_, index) => <Skeleton key={index} />);
     const LIMIT = 10;  //limit for pagination hard
 
     return (
