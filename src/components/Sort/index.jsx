@@ -35,9 +35,7 @@ export default function Sort() {
     const onSelect = (option) => {
         dispatch(setSort(option));
         setOpen(false);
-        console.log(option)
     };
-
     return (
         <div className="sort" ref={sortRef}>
             <div className="sort-label" onClick={() => setOpen(!open)}>

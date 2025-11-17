@@ -30,7 +30,6 @@ const categoriesSlice = createSlice({
             state.currentPage = Number(action.payload.currentPage);
             state.activeCategory = Number(action.payload.activeCategory);
             state.sort = action.payload.sort;
-
         }
     }
 
