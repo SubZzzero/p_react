@@ -18,14 +18,6 @@ export default function Sort() {
     const dispatch = useDispatch();
     const sort = useSelector(state => state.filters.sort);
 
-    // const options = [
-    //     { label: "Popularity: highest first", sort: "rating", order: "desc" },
-    //     { label: "Popularity: lowest first", sort: "rating", order: "asc" },
-    //     { label: "Price: highest first", sort: "price", order: "desc" },
-    //     { label: "Price: lowest first", sort: "price", order: "asc" },
-    //     { label: "Alphabet", sort: "name", order: "asc" },
-    // ];
-
     const [open, setOpen] = useState(false);
     const sortRef = useRef();
 

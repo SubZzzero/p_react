@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useRef } from 'react';
 import "../components/CategoriesList/CategoriesList.css";
 
 import axios from 'axios';
@@ -24,42 +24,17 @@ export default function Home() {
 
     const navigate = useNavigate();
 
+
     const [items, setItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-
+    const isSearch = useRef(false);
+    const isMounted = useRef(false)
     const { inputSearch } = useContext(SearchContext);
 
     const dispatch = useDispatch();
     const { categories, activeCategory, sort, currentPage } = useSelector(state => state.filters);
 
-    const onChangePage = (pageNumber) => {
-        dispatch(setCurrentPage(pageNumber))
-    }
-    const [searchUrl, setSearchUrl] = useState(false)
-
-    useEffect(() => {
-        if (window.location.search) {
-            const params = qs.parse(window.location.search.substring(1))
-            const sortingParams = options.find(items => items.sort === params.sortProperty || options[0]);
-
-            dispatch(setFilters({
-                activeCategory: Number(params.activeCategory),
-                currentPage: Number(params.currentPage),
-                sort: sortingParams
-            }))
-            setSearchUrl(true);
-        }
-    }, [])
-
-    //reset pagination
-    useEffect(() => {
-        if (!searchUrl) {
-            dispatch(setCurrentPage(1));
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [activeCategory, sort, inputSearch])
-
-    useEffect(() => {
+    const fetchItems = () => {
         setIsLoading(true);
         const category = categories[activeCategory];
         const search = inputSearch ? `&search=${inputSearch}` : ``;
@@ -78,16 +53,54 @@ export default function Home() {
                 setItems([]);
                 setIsLoading(false);
             });
+    }
+
+    const onChangePage = (pageNumber) => {
+        dispatch(setCurrentPage(pageNumber))
+    }
+
+    useEffect(() => {
+        if (window.location.search) {
+            const params = qs.parse(window.location.search.substring(1))
+            const sortingParams = options.find(opt => opt.sort === params.sortProperty) || options[0];
+
+            dispatch(setFilters({
+                activeCategory: Number(params.activeCategory),
+                currentPage: Number(params.currentPage),
+                sort: sortingParams
+            }))
+            isSearch.current = true;
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    //reset pagination
+    useEffect(() => {
+        if (!isSearch.current) {
+            dispatch(setCurrentPage(1));
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [activeCategory, sort, inputSearch]);
+
+    useEffect(() => {
+        if (!isSearch.current) {
+            fetchItems();
+        }
+        isSearch.current = false;
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeCategory, sort, inputSearch, currentPage]);
 
     useEffect(() => {
-        const queryString = qs.stringify({
-            sortProperty: sort.sort,
-            currentPage,
-            activeCategory
-        })
-        navigate(`?${queryString}`)
+        if (isMounted.current) {
+            const queryString = qs.stringify({
+                sortProperty: sort.sort,
+                currentPage,
+                activeCategory
+            })
+            navigate(`?${queryString}`)
+        }
+        isMounted.current = true;
+
     }, [sort, currentPage, activeCategory, navigate])
 
     const pizzaBlocks = items.map(obj => <PizzaBlock key={obj.id} {...obj} />);
