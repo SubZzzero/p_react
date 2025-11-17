@@ -7,7 +7,8 @@ const initialState = {
     sort: {
         label: "Popularity: highest first", sort: "rating", order: "desc"
     },
-    currentPage: 1
+    currentPage: 1,
+
 }
 
 const categoriesSlice = createSlice({
@@ -24,13 +25,18 @@ const categoriesSlice = createSlice({
         },
         setCurrentPage(state, action) {
             state.currentPage = action.payload;
-        }
+        },
+        setFilters(state, action) {
+            state.currentPage = Number(action.payload.currentPage);
+            state.activeCategory = Number(action.payload.activeCategory);
+            state.sort = action.payload.sort;
 
+        }
     }
 
 })
 
 
 
-export const { setActiveCategory, setSort, setCurrentPage } = categoriesSlice.actions;
+export const { setActiveCategory, setSort, setCurrentPage, setFilters } = categoriesSlice.actions;
 export default categoriesSlice.reducer;
