@@ -58,6 +58,11 @@
     object-fit: cover;
 }
 
+.cart-item-wrapper {
+    display: flex;
+    gap: 0 15px;
+}
+
 .cart-item-info h3 {
     margin: 0;
     font-size: 18px;

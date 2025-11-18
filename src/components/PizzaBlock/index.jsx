@@ -1,9 +1,30 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addItem } from "../../redux/slices/cartSlice";
 import "./PizzaBlock.css";
 
 export default function PizzaBlock({ name, imageUrl, type, size, price, id, rating }) {
     const [activeType, setActiveType] = useState(0);
     const [activeSize, setActiveSize] = useState(0);
+
+    const cartItem = useSelector((state) =>
+        state.cart.items.find((obj) => obj.id === id)
+    )
+    const count = cartItem ? cartItem.count : 0;
+
+    const dispatch = useDispatch()
+
+    const onClickAdd = (() => {
+        const items = {
+            id,
+            name,
+            imageUrl,
+            price,
+            types: type[activeType],
+            sizes: size[activeSize]
+        }
+        dispatch(addItem(items))
+    })
 
 
     function toCapitalize(text) {
@@ -50,8 +71,12 @@ export default function PizzaBlock({ name, imageUrl, type, size, price, id, rati
 
             <div className="pizza-block-bottom">
                 <div className="pizza-block-price">from ${price}</div>
-                <button className="button">
+                <button onClick={onClickAdd} className="button">
                     <span>Add</span>
+                    {count > 0 &&
+                        <span className="pizza-block-count">{count}</span>
+                    }
+
                 </button>
 
             </div>

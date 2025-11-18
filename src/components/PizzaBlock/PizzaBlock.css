@@ -7,10 +7,10 @@
     transition: all 0.3s ease;
 }
 
-.pizza-block:hover {
+/* .pizza-block:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
+} */
 
 .pizza-block-up-wrapper {
     display: flex;
@@ -90,6 +90,9 @@
     color: #333;
 }
 
+.pizza-block-count {
+    margin-left: 15px;
+}
 
 .button {
     background-color: #fe5f1e;
@@ -100,6 +103,7 @@
     font-weight: 600;
     transition: background 0.2s linear;
 }
+
 
 .button:hover {
     background-color: #e04b12;
