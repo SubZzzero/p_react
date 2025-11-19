@@ -1,9 +1,9 @@
 import React from 'react'
 import "./NotFoundBlock.css"
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 function NotFoundBlock() {
-    const navigate = useNavigate();
+
     return (
         <>
             <div className="not-found-block">
@@ -14,7 +14,10 @@ function NotFoundBlock() {
                         <h1 className="not-found-title">Oops! Something went wrong!</h1>
                         <img className="not-found-block-img" src="/img/Pizza_empty.png"
                             alt="empty" />
-                        <button onClick={() => navigate("/")} className="button">Return to Home</button>
+                        <Link to={"/"}>
+                            <button className="button">Return to Home</button>
+                        </Link>
+
                     </div>
 
                 </div>

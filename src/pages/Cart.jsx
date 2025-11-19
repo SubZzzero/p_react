@@ -4,13 +4,24 @@ import { Link } from "react-router-dom";
 import { IoMdTrash } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 
-import CartItem from "../components/CartItem/index"
+import { useDispatch } from "react-redux";
+import { clearItems } from "../redux/slices/cartSlice";
+
+import CartEmpty from "../components/CartEmpty/index";
+import CartItem from "./CartItem"
 import "../components/CartBlock/CartBlock.css";
 
 export default function Cart() {
-
+    const dispatch = useDispatch();
     const { items, totalPrice } = useSelector((state) => state.cart);
     const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+
+
+    if (items.length === 0) {
+        return (
+            <CartEmpty />
+        )
+    }
 
     return (
         <div className="cart-block">
@@ -23,7 +34,7 @@ export default function Cart() {
                             <p className="cart-total-pizzas">
                                 Total pizzas: {totalCount}
                             </p>
-                            <button className="clear-cart-btn">
+                            <button onClick={() => dispatch(clearItems())} className="clear-cart-btn">
                                 <IoMdTrash />
                             </button>
                         </div>
@@ -53,6 +64,6 @@ export default function Cart() {
 
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
