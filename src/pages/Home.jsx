@@ -34,26 +34,28 @@ export default function Home() {
     const dispatch = useDispatch();
     const { categories, activeCategory, sort, currentPage } = useSelector(state => state.filters);
 
-    const fetchItems = () => {
-        setIsLoading(true);
-        const category = categories[activeCategory];
-        const search = inputSearch ? `&search=${inputSearch}` : ``;
+    const fetchItems = async () => {
+        try {
+            setIsLoading(true);
+            const category = categories[activeCategory];
+            const search = inputSearch ? `&search=${inputSearch}` : ``;
 
-        const apiUrl =
-            category === "All"
-                ? `${URL}page=${currentPage}&limit=10&sortBy=${sort.sort}&order=${sort.order}${search}`
-                : `${URL}filter=${category}&sortBy=${sort.sort}&order=${sort.order}`;
+            const apiUrl =
+                category === "All"
+                    ? `${URL}page=${currentPage}&limit=10&sortBy=${sort.sort}&order=${sort.order}${search}`
+                    : `${URL}filter=${category}&sortBy=${sort.sort}&order=${sort.order}`;
 
-        axios.get(apiUrl)
-            .then(response => {
-                setItems(Array.isArray(response.data) ? response.data : []);
-                setIsLoading(false);
-            })
-            .catch(() => {
-                setItems([]);
-                setIsLoading(false);
-            });
-    }
+            const response = await axios.get(apiUrl);
+            const data = Array.isArray(response.data) ? response.data : [];
+
+            setItems(data);
+        } catch (error) {
+            console.error("Fetch error:", error);
+            setItems([]);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     const onChangePage = (pageNumber) => {
         dispatch(setCurrentPage(pageNumber))

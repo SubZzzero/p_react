@@ -29,3 +29,10 @@
     margin: 0 auto;
     width: 400px;
 }
+
+
+@media (min-width: 1920px) {
+    .not-found-block {
+        margin-top: 135px;
+    }
+}

@@ -12,6 +12,7 @@ export const SearchContext = React.createContext("")
 
 
 export default function App() {
+
   const [inputSearch, setInputSearch] = useState("")
 
   return (
