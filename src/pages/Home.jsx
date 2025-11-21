@@ -1,14 +1,15 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React, { useEffect, useContext, useRef } from 'react';
 import "../components/CategoriesList/CategoriesList.css";
 
-import axios from 'axios';
 import qs from "qs";
-
-import { setCurrentPage, setFilters } from '../redux/slices/filterSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { SearchContext } from '../App';
 import { useNavigate } from 'react-router-dom';
+
+import { SearchContext } from '../App';
 import { options } from '../components/Sort';
+
+import { fetchPizzas } from '../redux/slices/pizzasSlice';
+import { setCurrentPage, setFilters } from '../redux/slices/filterSlice';
 
 import CategoriesList from '../components/CategoriesList';
 import Sort from '../components/Sort';
@@ -16,98 +17,52 @@ import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
 
-
-
-
 export default function Home() {
-    const URL = "https://690b168a6ad3beba00f368a7.mockapi.io/items?";
 
     const navigate = useNavigate();
-
-
-    const [items, setItems] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const isSearch = useRef(false);
-    const isMounted = useRef(false)
-    const { inputSearch } = useContext(SearchContext);
-
     const dispatch = useDispatch();
+
+    const { items, isLoading } = useSelector(state => state.pizzas);
     const { categories, activeCategory, sort, currentPage } = useSelector(state => state.filters);
 
-    const fetchItems = async () => {
-        try {
-            setIsLoading(true);
-            const category = categories[activeCategory];
-            const search = inputSearch ? `&search=${inputSearch}` : ``;
+    const { inputSearch } = useContext(SearchContext);
 
-            const apiUrl =
-                category === "All"
-                    ? `${URL}page=${currentPage}&limit=10&sortBy=${sort.sort}&order=${sort.order}${search}`
-                    : `${URL}filter=${category}&sortBy=${sort.sort}&order=${sort.order}`;
-
-            const response = await axios.get(apiUrl);
-            const data = Array.isArray(response.data) ? response.data : [];
-
-            setItems(data);
-        } catch (error) {
-            console.error("Fetch error:", error);
-            setItems([]);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    const onChangePage = (pageNumber) => {
-        dispatch(setCurrentPage(pageNumber))
-    }
 
     useEffect(() => {
         if (window.location.search) {
-            const params = qs.parse(window.location.search.substring(1))
+            const params = qs.parse(window.location.search.substring(1));
             const sortingParams = options.find(opt => opt.sort === params.sortProperty) || options[0];
 
             dispatch(setFilters({
                 activeCategory: Number(params.activeCategory),
                 currentPage: Number(params.currentPage),
                 sort: sortingParams
-            }))
-            isSearch.current = true;
+            }));
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [dispatch]);
 
-    //reset pagination
+    const clearUrl = useRef(false)
     useEffect(() => {
-        if (!isSearch.current) {
-            dispatch(setCurrentPage(1));
+        if (!clearUrl.current) {
+            clearUrl.current = true
+            return
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [activeCategory, sort, inputSearch]);
+        const queryString = qs.stringify({
+            sortProperty: sort.sort,
+            currentPage,
+            activeCategory
+        });
 
-    useEffect(() => {
-        if (!isSearch.current) {
-            fetchItems();
-        }
-        isSearch.current = false;
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [activeCategory, sort, inputSearch, currentPage]);
+        navigate(`?${queryString}`);
+    }, [sort, currentPage, activeCategory, navigate]);
+
 
     useEffect(() => {
-        if (isMounted.current) {
-            const queryString = qs.stringify({
-                sortProperty: sort.sort,
-                currentPage,
-                activeCategory
-            })
-            navigate(`?${queryString}`)
-        }
-        isMounted.current = true;
-
-    }, [sort, currentPage, activeCategory, navigate])
+        dispatch(fetchPizzas());
+    }, [activeCategory, sort, currentPage, inputSearch, dispatch]);
 
     const pizzaBlocks = items.map(obj => <PizzaBlock key={obj.id} {...obj} />);
     const skeletons = [...new Array(10)].map((_, index) => <Skeleton key={index} />);
-    const LIMIT = 10;  //limit for pagination hard
 
     return (
         <div className="categories">
@@ -125,8 +80,11 @@ export default function Home() {
                     {isLoading ? skeletons : pizzaBlocks}
                 </div>
 
-                {pizzaBlocks.length >= LIMIT && (
-                    <Pagination currentPage={currentPage} onChangePage={onChangePage} />
+                {pizzaBlocks.length >= 10 && (
+                    <Pagination
+                        currentPage={currentPage}
+                        onChangePage={(page) => dispatch(setCurrentPage(page))}
+                    />
                 )}
             </div>
         </div>
