@@ -1,23 +1,23 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { useDispatch } from "react-redux";
-import { setActiveCategory } from "../../redux/slices/filterSlice";
+import { setActiveCategory, setSearch } from "../../redux/slices/filterSlice";
 
 import { FaSearch } from "react-icons/fa";
 import { MdOutlineClear } from "react-icons/md";
-import { SearchContext } from "../../App";
+
 
 import "./Search.css"
 
 function Search() {
     const dispatch = useDispatch();
     const focusInput = useRef(null);
-    const { setInputSearch } = useContext(SearchContext);
+
     const [localValue, setLocalValue] = useState("");
 
     const debouncedSetSearch = useDebouncedCallback(
         (value) => {
-            setInputSearch(value);
+            dispatch(setSearch(value));
         },
         350
     );
@@ -31,7 +31,7 @@ function Search() {
 
     const clearInputFocusInput = () => {
         setLocalValue("");
-        setInputSearch("");
+        dispatch(setSearch(""));
         focusInput.current.focus();
         debouncedSetSearch.cancel();
     };

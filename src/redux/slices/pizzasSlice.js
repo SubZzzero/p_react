@@ -3,21 +3,21 @@ import axios from "axios";
 
 export const fetchPizzas = createAsyncThunk(
     "pizzas/fetchPizzas",
-    async ({ inputSearch }, thunkAPI) => {
+    async (_, thunkAPI) => {
         const filters = thunkAPI.getState().filters;
-        const { categories, activeCategory, sort, currentPage } = filters;
+        const { categories, activeCategory, sort, currentPage, search } = filters;
         const URL = "https://690b168a6ad3beba00f368a7.mockapi.io/items?";
 
         const category = categories[activeCategory];
 
-        const search =
-            category === "All" && inputSearch
-                ? `&search=${inputSearch}`
+        const searchQuery =
+            category === "All" && search
+                ? `&search=${search}`
                 : "";
 
         const apiUrl =
             category === "All"
-                ? `${URL}page=${currentPage}&limit=10&sortBy=${sort.sort}&order=${sort.order}${search}`
+                ? `${URL}page=${currentPage}&limit=10&sortBy=${sort.sort}&order=${sort.order}${searchQuery}`
                 : `${URL}filter=${category}&sortBy=${sort.sort}&order=${sort.order}`;
 
         const res = await axios.get(apiUrl);
@@ -42,12 +42,10 @@ const pizzasSlice = createSlice({
                 state.isLoading = true;
                 state.error = null;
                 state.items = [];
-                console.log("pending")
             })
             .addCase(fetchPizzas.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.items = action.payload;
-                console.log("fulfield")
             })
             .addCase(fetchPizzas.rejected, (state) => {
                 state.isLoading = false;

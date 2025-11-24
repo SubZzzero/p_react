@@ -1,11 +1,11 @@
-import React, { useEffect, useContext, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import "../components/CategoriesList/CategoriesList.css";
 
 import qs from "qs";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { SearchContext } from '../App';
+
 import { options } from '../components/Sort';
 
 import { fetchPizzas } from '../redux/slices/pizzasSlice';
@@ -23,9 +23,9 @@ export default function Home() {
     const dispatch = useDispatch();
 
     const { items, isLoading } = useSelector(state => state.pizzas);
-    const { categories, activeCategory, sort, currentPage } = useSelector(state => state.filters);
+    const { categories, activeCategory, sort, currentPage, search } = useSelector(state => state.filters);
 
-    const { inputSearch } = useContext(SearchContext);
+
 
 
     useEffect(() => {
@@ -58,8 +58,8 @@ export default function Home() {
 
 
     useEffect(() => {
-        dispatch(fetchPizzas({ inputSearch }));
-    }, [activeCategory, sort, currentPage, inputSearch, dispatch]);
+        dispatch(fetchPizzas({ inputSearch: search }));
+    }, [activeCategory, sort, currentPage, search, dispatch]);
 
     const pizzaBlocks = items.map(obj => <PizzaBlock key={obj.id} {...obj} />);
     const skeletons = [...new Array(10)].map((_, index) => <Skeleton key={index} />);
