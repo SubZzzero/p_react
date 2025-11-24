@@ -58,7 +58,7 @@ export default function Home() {
 
 
     useEffect(() => {
-        dispatch(fetchPizzas());
+        dispatch(fetchPizzas({ inputSearch }));
     }, [activeCategory, sort, currentPage, inputSearch, dispatch]);
 
     const pizzaBlocks = items.map(obj => <PizzaBlock key={obj.id} {...obj} />);

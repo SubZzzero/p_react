@@ -3,13 +3,17 @@ import axios from "axios";
 
 export const fetchPizzas = createAsyncThunk(
     "pizzas/fetchPizzas",
-    async (_, thunkAPI) => {
+    async ({ inputSearch }, thunkAPI) => {
         const filters = thunkAPI.getState().filters;
         const { categories, activeCategory, sort, currentPage } = filters;
         const URL = "https://690b168a6ad3beba00f368a7.mockapi.io/items?";
 
         const category = categories[activeCategory];
-        const search = filters.search ? `&search=${filters.search}` : "";
+
+        const search =
+            category === "All" && inputSearch
+                ? `&search=${inputSearch}`
+                : "";
 
         const apiUrl =
             category === "All"
