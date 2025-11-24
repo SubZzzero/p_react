@@ -26,8 +26,6 @@ export default function Home() {
     const { categories, activeCategory, sort, currentPage, search } = useSelector(state => state.filters);
 
 
-
-
     useEffect(() => {
         if (window.location.search) {
             const params = qs.parse(window.location.search.substring(1));
@@ -44,8 +42,8 @@ export default function Home() {
     const clearUrl = useRef(false)
     useEffect(() => {
         if (!clearUrl.current) {
-            clearUrl.current = true
-            return
+            clearUrl.current = true;
+            return;
         }
         const queryString = qs.stringify({
             sortProperty: sort.sort,
