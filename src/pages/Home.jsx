@@ -5,7 +5,6 @@ import qs from "qs";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-
 import { options } from '../components/Sort';
 
 import { fetchPizzas } from '../redux/slices/pizzasSlice';
@@ -56,7 +55,7 @@ export default function Home() {
 
 
     useEffect(() => {
-        dispatch(fetchPizzas({ inputSearch: search }));
+        dispatch(fetchPizzas());
     }, [activeCategory, sort, currentPage, search, dispatch]);
 
     const pizzaBlocks = items.map(obj => <PizzaBlock key={obj.id} {...obj} />);
