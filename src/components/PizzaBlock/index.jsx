@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addItem } from "../../redux/slices/cartSlice";
 import "./PizzaBlock.css";
@@ -14,7 +15,7 @@ export default function PizzaBlock({ name, imageUrl, type, size, price, id, rati
 
     const dispatch = useDispatch()
 
-    const onClickAdd = (() => {
+    const onClickAdd = () => {
         const items = {
             id,
             name,
@@ -24,26 +25,28 @@ export default function PizzaBlock({ name, imageUrl, type, size, price, id, rati
             sizes: size[activeSize]
         }
         dispatch(addItem(items))
-    })
-
+    };
 
     function toCapitalize(text) {
         return text.charAt(0).toUpperCase() + text.slice(1);
-    }
+    };
 
     return (
         <div className="pizza-block">
             <div className="pizza-block-up-wrapper">
-                <h4 className="pizza-block-title">{name}
-                </h4>
+
+                <Link to={`/pizza/${id}`}>
+                    <h4 className="pizza-block-title">{name}
+                    </h4>
+                </Link>
                 <span className="pizza-block-rating">{rating}</span>
             </div>
-            <img
+            <Link to={`/pizza/${id}`}><img
                 className="pizza-block-image"
                 src={imageUrl}
                 alt={`pizza ${name} ${id}`}
             />
-
+            </Link>
             <div className="pizza-block-selector">
                 <ul className="pizza-block-list">
                     {type.map((type, index) => (

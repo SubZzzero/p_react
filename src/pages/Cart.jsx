@@ -9,7 +9,7 @@ import { clearItems } from "../redux/slices/cartSlice";
 
 import CartEmpty from "../components/CartEmpty/index";
 import CartItem from "./CartItem"
-import "../components/CartBlock/CartBlock.css";
+import "../components/PagesCss/CartBlock.css";
 
 export default function Cart() {
     const dispatch = useDispatch();

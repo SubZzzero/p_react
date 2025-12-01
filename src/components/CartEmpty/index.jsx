@@ -1,9 +1,11 @@
 import React from 'react'
 import "./CartEmpty.css"
 import { Link } from 'react-router-dom'
-
+import { useDispatch } from "react-redux";
+import { setActiveCategory, setCurrentPage } from "../../redux/slices/filterSlice";
 
 function CartEmpty() {
+    const dispatch = useDispatch();
     return (
         <>
 
@@ -14,7 +16,10 @@ function CartEmpty() {
                     <img className="cart-empty-img" src="/img/cart-empty.png"
                         alt="empty" />
 
-                    <Link to="/" >
+                    <Link to="/" onClick={() => {
+                        dispatch(setActiveCategory(0))
+                        dispatch(setCurrentPage(1))
+                    }}>
                         <button className='button'>Return to Home</button>
                     </Link>
                 </div>

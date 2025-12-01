@@ -33,6 +33,7 @@ export default function Header() {
                     {location.pathname !== "/cart" && (
                         <>
                             <Search />
+
                             <div className="button-wrapper">
                                 <Link className="button button-cart" to="/cart">
                                     <span className="button-price">{totalPrice} $</span>
@@ -42,10 +43,8 @@ export default function Header() {
                                 </Link>
                             </div>
                         </>
-                    )};
 
-
-
+                    )}
                 </div>
             </div>
         </header>
