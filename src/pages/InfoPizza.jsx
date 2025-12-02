@@ -2,12 +2,13 @@
 import React, { useEffect, useState } from 'react'
 import "../components/PagesCss/InfoPizza.css";
 import axios from 'axios'
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+
 
 export default function InfoPizza() {
     const [items, setItems] = useState();
     const { id } = useParams();
-    console.log(items)
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function fetchPizzas() {
@@ -17,12 +18,13 @@ export default function InfoPizza() {
                 );
                 setItems(data)
             } catch (error) {
+                alert("Not found pizza")
                 console.log(error);
-                setItems([])
+                navigate("/")
             }
         }
         fetchPizzas();
-    }, [id]);
+    }, [id, navigate]);
 
     if (!items) {
         return <div>Loading...</div>;

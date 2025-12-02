@@ -32,7 +32,7 @@ export default function Home() {
 
             dispatch(setFilters({
                 activeCategory: Number(params.activeCategory),
-                currentPage: Number(params.currentPage),
+                currentPage: 1,
                 sort: sortingParams
             }));
         }
@@ -53,8 +53,12 @@ export default function Home() {
         navigate(`?${queryString}`);
     }, [sort, currentPage, activeCategory, navigate]);
 
-
+    // const isFirstRender = useRef(true);
     useEffect(() => {
+        // if (isFirstRender.current) {
+        //     isFirstRender.current = false;
+        //     return;
+        // }
         dispatch(fetchPizzas());
     }, [activeCategory, sort, currentPage, search, dispatch]);
 

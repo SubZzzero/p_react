@@ -19,7 +19,7 @@ const categoriesSlice = createSlice({
     reducers: {
         setActiveCategory(state, action) {
             state.activeCategory = action.payload;
-
+            state.currentPage = 1;
         },
         setSort(state, action) {
             state.sort = action.payload;
