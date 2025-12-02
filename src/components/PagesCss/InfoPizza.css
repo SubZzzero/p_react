@@ -14,6 +14,7 @@
     font-weight: 900;
     text-transform: uppercase;
     margin-bottom: 15px;
+    cursor: default;
 }
 
 .info-pizza-img {
@@ -23,4 +24,5 @@
 
 .info-pizza-desc {
     margin-bottom: 15px;
+    cursor: default;
 }

@@ -19,7 +19,7 @@ function Search() {
         (value) => {
             dispatch(setSearch(value));
         },
-        350
+        400
     );
 
     const onChangeInput = (event) => {

@@ -27,7 +27,11 @@ export default function InfoPizza() {
     }, [id, navigate]);
 
     if (!items) {
-        return <div>Loading...</div>;
+
+        return (<div style={{ color: "white", fontSize: "46px", textAlign: "center" }}>
+            Loading...
+        </div>)
+
     }
     return (
         <div className='info-pizza'>
