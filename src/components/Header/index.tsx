@@ -1,8 +1,8 @@
-import React from 'react';
+
 import "./Header.css"
 import Search from '../Search';
 import { useSelector } from 'react-redux';
-
+import { selectCart } from '../../redux/slices/cartSlice';
 
 import { Link, useLocation } from 'react-router-dom';
 import { PiShoppingCartSimple } from "react-icons/pi";
@@ -10,8 +10,8 @@ import { PiShoppingCartSimple } from "react-icons/pi";
 
 
 export default function Header() {
-    const { items, totalPrice } = useSelector(state => state.cart);
-    const totalCount = items.reduce((sum, item) => sum + item.count, 0)
+    const { items, totalPrice } = useSelector(selectCart);
+    const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0) //need fix
     const location = useLocation();
 
     return (

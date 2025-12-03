@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+
 export const fetchPizzas = createAsyncThunk(
     "pizzas/fetchPizzas",
     async (_, thunkAPI) => {
@@ -54,5 +55,5 @@ const pizzasSlice = createSlice({
             });
     },
 });
-
+export const selectPizzas = (state) => state.pizzas;
 export default pizzasSlice.reducer;

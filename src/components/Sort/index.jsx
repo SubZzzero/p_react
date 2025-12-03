@@ -1,10 +1,8 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setSort } from "../../redux/slices/filterSlice";
+import { setSort, selectSort } from "../../redux/slices/filterSlice";
 import { FiChevronDown } from "react-icons/fi";
 import "./Sort.css";
-
-
 
 export const options = [
     { label: "Popularity: highest first", sort: "rating", order: "desc" },
@@ -16,7 +14,7 @@ export const options = [
 
 export default function Sort() {
     const dispatch = useDispatch();
-    const sort = useSelector(state => state.filters.sort);
+    const sort = useSelector(selectSort);
 
     const [open, setOpen] = useState(false);
     const sortRef = useRef();

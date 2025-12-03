@@ -6,6 +6,7 @@ import { IoIosArrowBack } from "react-icons/io";
 
 import { useDispatch } from "react-redux";
 import { clearItems } from "../redux/slices/cartSlice";
+import { selectCart } from "../redux/slices/cartSlice";
 
 import CartEmpty from "../components/CartEmpty/index";
 import CartItem from "./CartItem"
@@ -13,9 +14,8 @@ import "../components/PagesCss/CartBlock.css";
 
 export default function Cart() {
     const dispatch = useDispatch();
-    const { items, totalPrice } = useSelector((state) => state.cart);
-    const totalCount = items.reduce((sum, item) => sum + item.count, 0);
-
+    const { items, totalPrice } = useSelector(selectCart);
+    const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);//need fix
 
     if (items.length === 0) {
         return (
@@ -41,7 +41,7 @@ export default function Cart() {
                     </div>
 
 
-                    {items.map((item) => (
+                    {items.map((item: any) => (
                         <CartItem key={item.id} {...item} />
                     ))}
 

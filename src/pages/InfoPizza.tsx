@@ -4,11 +4,18 @@ import "../components/PagesCss/InfoPizza.css";
 import axios from 'axios'
 import { useParams, Link, useNavigate } from 'react-router-dom';
 
+type dataPizza = {
+    imageUrl: string,
+    name: string,
+    description: string
+}
 
 export default function InfoPizza() {
-    const [items, setItems] = useState();
+    const [items, setItems] = useState<dataPizza | null>(null);
+
     const { id } = useParams();
     const navigate = useNavigate();
+
 
     useEffect(() => {
         async function fetchPizzas() {
@@ -28,11 +35,12 @@ export default function InfoPizza() {
 
     if (!items) {
 
-        return (<div style={{ color: "white", fontSize: "46px", textAlign: "center" }}>
+        return (<span style={{ color: "white", fontSize: "46px", textAlign: "center", display: 'block', marginTop: "150px" }}>
             Loading...
-        </div>)
+        </span>)
 
     }
+
     return (
         <div className='info-pizza'>
             <div className='container'>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import "../components/CategoriesList/CategoriesList.css";
 
 import qs from "qs";
@@ -7,8 +7,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { options } from '../components/Sort';
 
-import { fetchPizzas } from '../redux/slices/pizzasSlice';
-import { setCurrentPage, setFilters } from '../redux/slices/filterSlice';
+import { fetchPizzas, selectPizzas } from '../redux/slices/pizzasSlice';
+import { setCurrentPage, setFilters, selectFilters } from '../redux/slices/filterSlice';
 
 import CategoriesList from '../components/CategoriesList';
 import Sort from '../components/Sort';
@@ -21,8 +21,8 @@ export default function Home() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const { items, isLoading } = useSelector(state => state.pizzas);
-    const { categories, activeCategory, sort, currentPage, search } = useSelector(state => state.filters);
+    const { items, isLoading } = useSelector(selectPizzas);
+    const { categories, activeCategory, sort, currentPage, search } = useSelector(selectFilters);
 
 
     useEffect(() => {

@@ -43,4 +43,6 @@ const categoriesSlice = createSlice({
 
 
 export const { setActiveCategory, setSort, setCurrentPage, setFilters, setSearch } = categoriesSlice.actions;
+export const selectFilters = (state) => state.filters;
+export const selectSort = (state) => state.filters.sort;
 export default categoriesSlice.reducer;
