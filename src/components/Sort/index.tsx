@@ -25,12 +25,13 @@ export default function Sort() {
     const [open, setOpen] = useState(false);
     const sortRef = useRef<HTMLDivElement | null>(null);
 
-    //FIX
     useEffect(() => {
-        const handleClickOutside = (event: any) => {
-            if (sortRef.current && !sortRef.current.contains(event.target)) {
+        const handleClickOutside = (event: MouseEvent) => {
+            const target = event.target as Node;
+            if (sortRef.current && !sortRef.current.contains(target)) {
                 setOpen(false);
             }
+
         };
 
         document.addEventListener("click", handleClickOutside);
