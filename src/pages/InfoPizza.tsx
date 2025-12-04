@@ -4,14 +4,14 @@ import "../components/PagesCss/InfoPizza.css";
 import axios from 'axios'
 import { useParams, Link, useNavigate } from 'react-router-dom';
 
-type dataPizza = {
+type DataPizza = {
     imageUrl: string,
     name: string,
     description: string
 }
 
 export default function InfoPizza() {
-    const [items, setItems] = useState<dataPizza | null>(null);
+    const [items, setItems] = useState<DataPizza | null>(null);
 
     const { id } = useParams();
     const navigate = useNavigate();

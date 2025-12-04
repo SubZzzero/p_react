@@ -11,18 +11,18 @@ import "./Search.css"
 
 function Search() {
     const dispatch = useDispatch();
-    const focusInput = useRef(null);
+    const focusInput = useRef<HTMLInputElement | null>(null);
 
-    const [localValue, setLocalValue] = useState("");
+    const [localValue, setLocalValue] = useState<string>("");
 
     const debouncedSetSearch = useDebouncedCallback(
-        (value) => {
+        (value: number) => {
             dispatch(setSearch(value));
         },
         400
     );
-
-    const onChangeInput = (event) => {
+    //FIX
+    const onChangeInput = (event: any) => {
         const val = event.target.value;
         setLocalValue(val);
         debouncedSetSearch(val);
@@ -32,7 +32,7 @@ function Search() {
     const clearInputFocusInput = () => {
         setLocalValue("");
         dispatch(setSearch(""));
-        focusInput.current.focus();
+        focusInput.current?.focus();
         debouncedSetSearch.cancel();
     };
 

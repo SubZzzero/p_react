@@ -4,7 +4,13 @@ import { setSort, selectSort } from "../../redux/slices/filterSlice";
 import { FiChevronDown } from "react-icons/fi";
 import "./Sort.css";
 
-export const options = [
+type SortOptions = {
+    label: string;
+    sort: string;
+    order: string;
+}
+
+export const options: SortOptions[] = [
     { label: "Popularity: highest first", sort: "rating", order: "desc" },
     { label: "Popularity: lowest first", sort: "rating", order: "asc" },
     { label: "Price: highest first", sort: "price", order: "desc" },
@@ -17,10 +23,11 @@ export default function Sort() {
     const sort = useSelector(selectSort);
 
     const [open, setOpen] = useState(false);
-    const sortRef = useRef();
+    const sortRef = useRef<HTMLDivElement | null>(null);
 
+    //FIX
     useEffect(() => {
-        const handleClickOutside = (event) => {
+        const handleClickOutside = (event: any) => {
             if (sortRef.current && !sortRef.current.contains(event.target)) {
                 setOpen(false);
             }
@@ -30,7 +37,7 @@ export default function Sort() {
         return () => document.removeEventListener("click", handleClickOutside);
     }, []);
 
-    const onSelect = (option) => {
+    const onSelect = (option: SortOptions) => {
         dispatch(setSort(option));
         setOpen(false);
     };
