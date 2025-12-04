@@ -2,11 +2,18 @@
 import ReactPaginate from 'react-paginate';
 import "./Pagination.css"
 
+type PaginationProperties = {
+    currentPage: number;
+    onChangePage: (page: number) => void;
+}
 
+type OnChangePageSelected = {
+    selected: number;
+}
 
-export default function Pagination({ currentPage, onChangePage }) {
+export default function Pagination({ currentPage, onChangePage }: PaginationProperties) {
 
-    const onChangePageLocal = (event) => {
+    const onChangePageLocal = (event: OnChangePageSelected) => {
         window.scrollTo(0, 0);
         onChangePage(event.selected + 1);
     };

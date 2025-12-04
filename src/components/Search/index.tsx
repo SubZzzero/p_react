@@ -21,8 +21,8 @@ function Search() {
         },
         400
     );
-    //FIX EVENT
-    const onChangeInput = (event: any) => {
+
+    const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         const val = event.target.value;
         setLocalValue(val);
         debouncedSetSearch(val);
