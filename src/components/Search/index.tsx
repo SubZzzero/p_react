@@ -16,12 +16,12 @@ function Search() {
     const [localValue, setLocalValue] = useState<string>("");
 
     const debouncedSetSearch = useDebouncedCallback(
-        (value: number) => {
+        (value: string) => {
             dispatch(setSearch(value));
         },
         400
     );
-    //FIX
+    //FIX EVENT
     const onChangeInput = (event: any) => {
         const val = event.target.value;
         setLocalValue(val);

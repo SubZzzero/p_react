@@ -2,7 +2,18 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { increaseItem, decreaseItem, removeItem } from "../redux/slices/cartSlice";
 
-export default function CartItem({ id, name, price, imageUrl, types, sizes, count }) {
+
+type CartItemProperties = {
+    id: string;
+    name: string
+    price: number;
+    imageUrl: string;
+    types: number[];
+    sizes: string[];
+    count: number;
+}
+
+export default function CartItem({ id, name, price, imageUrl, types, sizes, count }: CartItemProperties) {
     const dispatch = useDispatch()
 
     return (

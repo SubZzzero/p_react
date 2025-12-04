@@ -4,12 +4,24 @@ import { useSelector, useDispatch } from "react-redux";
 import { addItem } from "../../redux/slices/cartSlice";
 import "./PizzaBlock.css";
 
-export default function PizzaBlock({ name, imageUrl, type, size, price, id, rating }) {
+
+type PizzaBlockProperties = {
+    name: string;
+    imageUrl: string
+    type: string[];
+    size: number[];
+    price: number;
+    id: string;
+    rating: number;
+}
+
+export default function PizzaBlock({ name, imageUrl, type, size, price, id, rating }: PizzaBlockProperties) {
     const [activeType, setActiveType] = useState(0);
     const [activeSize, setActiveSize] = useState(0);
 
-    const cartItem = useSelector((state) =>
-        state.cart.items.find((obj) => obj.id === id)
+    //FIX
+    const cartItem = useSelector((state: any) =>
+        state.cart.items.find((obj: any) => obj.id === id)
     )
     const count = cartItem ? cartItem.count : 0;
 
@@ -27,7 +39,7 @@ export default function PizzaBlock({ name, imageUrl, type, size, price, id, rati
         dispatch(addItem(items))
     };
 
-    function toCapitalize(text) {
+    function toCapitalize(text: string) {
         return text.charAt(0).toUpperCase() + text.slice(1);
     };
 
