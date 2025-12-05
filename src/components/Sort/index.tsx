@@ -20,6 +20,7 @@ export const options: SortOptions[] = [
 
 export default function Sort() {
     const dispatch = useDispatch();
+    //FIX SORT
     const sort = useSelector(selectSort);
 
     const [open, setOpen] = useState(false);

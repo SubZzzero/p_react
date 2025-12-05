@@ -14,6 +14,7 @@ import "../components/PagesCss/CartBlock.css";
 
 export default function Cart() {
     const dispatch = useDispatch();
+    //FIX ITEMS TPRICE
     const { items, totalPrice } = useSelector(selectCart);
     const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);//need fix
 

@@ -1,7 +1,9 @@
 
-import ContentLoader from "react-content-loader"
-//FIX PROPS
-const Skeleton = (props: any) => (
+import React from "react";
+import ContentLoader, { IContentLoaderProps } from "react-content-loader"
+
+
+const Skeleton: React.FC<IContentLoaderProps> = (props) => (
     <ContentLoader
         className="pizza-block"
         speed={2}
