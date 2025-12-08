@@ -10,7 +10,7 @@ export default function CategoriesList() {
 
     return (
         <ul className="categories-list">
-            {categories.map((item: string, index: number) => (
+            {categories.map((item, index) => (
                 <li
                     key={item}
                     className={`categories-item ${activeCategory === index ? "active" : ""}`}

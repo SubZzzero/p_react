@@ -15,13 +15,15 @@ type PizzaBlockProperties = {
     id: string;
     rating: number;
 }
+export function toCapitalize(text: string) {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+};
 
 export default function PizzaBlock({ name, imageUrl, type, size, price, id, rating }: PizzaBlockProperties) {
     const [activeType, setActiveType] = useState(0);
     const [activeSize, setActiveSize] = useState(0);
 
-    //FIX
-    // const cartItem = useSelector((state: RootState) => selectCartItem(state, id));
+
     const cartItem = useSelector((state: RootState) =>
         selectCartItem(
             state,
@@ -30,7 +32,6 @@ export default function PizzaBlock({ name, imageUrl, type, size, price, id, rati
             size[activeSize]
         )
     );
-
 
     const count = cartItem ? cartItem.count : 0;
 
@@ -49,9 +50,7 @@ export default function PizzaBlock({ name, imageUrl, type, size, price, id, rati
         dispatch(addItem(items))
     };
 
-    function toCapitalize(text: string) {
-        return text.charAt(0).toUpperCase() + text.slice(1);
-    };
+
 
     return (
         <div className="pizza-block">

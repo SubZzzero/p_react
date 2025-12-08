@@ -12,6 +12,7 @@ import CartEmpty from "../components/CartEmpty/index";
 import CartItem from "./CartItem"
 import "../components/PagesCss/CartBlock.css";
 
+
 export default function Cart() {
     const dispatch = useDispatch();
 
@@ -41,11 +42,9 @@ export default function Cart() {
                         </div>
                     </div>
 
-
                     {items.map((item) => (
                         <CartItem key={item.id} {...item} />
                     ))}
-
 
                     <div className="cart-total">
                         <p>Total price: <span>${totalPrice}</span></p>

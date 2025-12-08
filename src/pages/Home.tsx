@@ -17,10 +17,10 @@ import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
 
 export default function Home() {
-    //FIX
+
     const navigate = useNavigate();
     const dispatch = useDispatch<any>();
-    //FIX
+
     const { items, isLoading } = useSelector(selectPizzas);
     const { categories, activeCategory, sort, currentPage, search } = useSelector(selectFilters);
 
@@ -59,12 +59,25 @@ export default function Home() {
         //     isFirstRender.current = false;
         //     return;
         // }
-        dispatch(fetchPizzas());
-    }, [activeCategory, sort, currentPage, search, dispatch]);
+        dispatch(fetchPizzas({
+            categories,
+            activeCategory,
+            sort,
+            currentPage,
+            search
+        }));
+    }, [activeCategory, categories, sort, currentPage, search, dispatch]);
 
     //FIX
-    const pizzaBlocks = items.map((obj: any) => (
-        <PizzaBlock key={obj.id} {...obj} />
+    const pizzaBlocks = items.map((obj) => (
+        <PizzaBlock key={obj.id}
+            id={obj.id}
+            name={obj.name}
+            imageUrl={obj.imageUrl}
+            price={obj.price}
+            type={obj.type}
+            size={obj.size}
+            rating={obj.rating} />
     ));
     const skeletons = [...new Array(10)].map((_, index) => <Skeleton key={index} />);
 

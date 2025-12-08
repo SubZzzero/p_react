@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { increaseItem, decreaseItem, removeItem } from "../redux/slices/cartSlice";
-
+import { toCapitalize } from "../components/PizzaBlock";
 
 type CartItemProperties = {
     id: string;
@@ -24,7 +24,7 @@ export default function CartItem({ id, name, price, imageUrl, type, size, count 
                 <h3>{name}</h3>
                 <p>${price}</p>
                 <div className="cart-item-wrapper">
-                    <p>{type}</p>
+                    <p>{toCapitalize(type)}</p>
                     <p>{size}cm</p>
                 </div>
             </div>
