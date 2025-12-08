@@ -1,8 +1,9 @@
 
 import React, { useEffect, useState } from 'react'
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import "../components/PagesCss/InfoPizza.css";
 import axios from 'axios'
-import { useParams, Link, useNavigate } from 'react-router-dom';
+
 
 type DataPizza = {
     imageUrl: string,

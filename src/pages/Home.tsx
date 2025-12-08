@@ -15,11 +15,12 @@ import Sort from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
+import { AppDispatch } from '../redux/store';
 
 export default function Home() {
 
     const navigate = useNavigate();
-    const dispatch = useDispatch<any>();
+    const dispatch = useDispatch<AppDispatch>();
 
     const { items, isLoading } = useSelector(selectPizzas);
     const { categories, activeCategory, sort, currentPage, search } = useSelector(selectFilters);

@@ -3,7 +3,6 @@ import axios from "axios";
 import { RootState } from "../store";
 import { SortFeature } from "./filterSlice";
 
-
 export type FetchArgs = {
     categories: string[];
     activeCategory: number;
@@ -62,21 +61,21 @@ const pizzasSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder
-            .addCase(fetchPizzas.pending, (state) => {
-                state.isLoading = true;
-                state.error = null;
-                state.items = [];
-            })
-            .addCase(fetchPizzas.fulfilled, (state, action) => {
-                state.isLoading = false;
-                state.items = action.payload;
-            })
-            .addCase(fetchPizzas.rejected, (state) => {
-                state.isLoading = false;
-                state.error = "error loading";
-                state.items = [];
-            });
+
+        builder.addCase(fetchPizzas.pending, (state) => {
+            state.isLoading = true;
+            state.error = null;
+            state.items = [];
+        })
+        builder.addCase(fetchPizzas.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.items = action.payload;
+        })
+        builder.addCase(fetchPizzas.rejected, (state) => {
+            state.isLoading = false;
+            state.error = "error loading";
+            state.items = [];
+        });
     },
 });
 

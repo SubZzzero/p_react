@@ -2,9 +2,10 @@
 import { useSelector, useDispatch } from "react-redux";
 import { setActiveCategory, selectFilters } from "../../redux/slices/filterSlice";
 import "./CategoriesList.css";
+import { AppDispatch } from "../../redux/store";
 
 export default function CategoriesList() {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const { categories, activeCategory } = useSelector(selectFilters);
 
 

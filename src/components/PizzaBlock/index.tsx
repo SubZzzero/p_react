@@ -1,10 +1,9 @@
 import React, { useState } from "react";
+import "./PizzaBlock.css";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addItem, selectCartItem } from "../../redux/slices/cartSlice";
-import "./PizzaBlock.css";
-import { RootState } from "../../redux/store";
-
+import { AppDispatch, RootState } from "../../redux/store";
 
 type PizzaBlockProperties = {
     name: string;
@@ -23,7 +22,6 @@ export default function PizzaBlock({ name, imageUrl, type, size, price, id, rati
     const [activeType, setActiveType] = useState(0);
     const [activeSize, setActiveSize] = useState(0);
 
-
     const cartItem = useSelector((state: RootState) =>
         selectCartItem(
             state,
@@ -35,7 +33,7 @@ export default function PizzaBlock({ name, imageUrl, type, size, price, id, rati
 
     const count = cartItem ? cartItem.count : 0;
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
 
     const onClickAdd = () => {
         const items = {
@@ -49,8 +47,6 @@ export default function PizzaBlock({ name, imageUrl, type, size, price, id, rati
         }
         dispatch(addItem(items))
     };
-
-
 
     return (
         <div className="pizza-block">

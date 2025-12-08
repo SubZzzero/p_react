@@ -6,11 +6,11 @@ import { setActiveCategory, setSearch } from "../../redux/slices/filterSlice";
 import { FaSearch } from "react-icons/fa";
 import { MdOutlineClear } from "react-icons/md";
 
-
 import "./Search.css"
+import { AppDispatch } from '../../redux/store';
 
 function Search() {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const focusInput = useRef<HTMLInputElement | null>(null);
 
     const [localValue, setLocalValue] = useState<string>("");

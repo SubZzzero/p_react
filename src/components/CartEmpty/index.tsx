@@ -3,9 +3,10 @@ import "./CartEmpty.css"
 import { Link } from 'react-router-dom'
 import { useDispatch } from "react-redux";
 import { setActiveCategory, setCurrentPage } from "../../redux/slices/filterSlice";
+import { AppDispatch } from "../../redux/store";
 
 function CartEmpty() {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     return (
         <>
 

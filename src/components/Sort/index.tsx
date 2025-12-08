@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setSort, selectSort } from "../../redux/slices/filterSlice";
 import { FiChevronDown } from "react-icons/fi";
 import "./Sort.css";
+import { AppDispatch } from "../../redux/store";
 
 type SortOptions = {
     label: string;
@@ -19,8 +20,8 @@ export const options: SortOptions[] = [
 ];
 
 export default function Sort() {
-    const dispatch = useDispatch();
-    //FIX SORT
+    const dispatch = useDispatch<AppDispatch>();
+
     const sort = useSelector(selectSort);
 
     const [open, setOpen] = useState(false);

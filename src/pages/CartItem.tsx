@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { increaseItem, decreaseItem, removeItem } from "../redux/slices/cartSlice";
 import { toCapitalize } from "../components/PizzaBlock";
+import { AppDispatch } from "../redux/store";
 
 type CartItemProperties = {
     id: string;
@@ -14,7 +15,7 @@ type CartItemProperties = {
 }
 
 export default function CartItem({ id, name, price, imageUrl, type, size, count }: CartItemProperties) {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
 
     return (
         <div className="cart-item">

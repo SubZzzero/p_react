@@ -1,20 +1,17 @@
-
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { IoMdTrash } from "react-icons/io";
-import { IoIosArrowBack } from "react-icons/io";
+import { IoMdTrash, IoIosArrowBack } from "react-icons/io";
 
-import { useDispatch } from "react-redux";
-import { clearItems } from "../redux/slices/cartSlice";
-import { selectCart } from "../redux/slices/cartSlice";
+import { clearItems, selectCart } from "../redux/slices/cartSlice";
 
 import CartEmpty from "../components/CartEmpty/index";
 import CartItem from "./CartItem"
 import "../components/PagesCss/CartBlock.css";
+import { AppDispatch } from "../redux/store";
 
 
 export default function Cart() {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     const { items, totalPrice } = useSelector(selectCart);
     const totalCount = items.reduce((sum, item) => sum + item.count, 0);
