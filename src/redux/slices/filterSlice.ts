@@ -1,6 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { RootState } from "../store";
 
-const initialState = {
+
+type SortFeature = {
+    label: string;
+    sort: string;
+    order: string;
+}
+
+interface filterSliceState {
+    categories: string[];
+    activeCategory: number;
+    sort: SortFeature;
+    currentPage: number;
+    search: string;
+}
+
+const initialState: filterSliceState = {
     categories: ["All", "Meat", "Vegetarian", "Grill", "Spicy", "Closed"],
     activeCategory: 0,
 
@@ -43,6 +59,6 @@ const categoriesSlice = createSlice({
 
 
 export const { setActiveCategory, setSort, setCurrentPage, setFilters, setSearch } = categoriesSlice.actions;
-export const selectFilters = (state) => state.filters;
-export const selectSort = (state) => state.filters.sort;
+export const selectFilters = (state: RootState) => state.filters;
+export const selectSort = (state: RootState) => state.filters.sort;
 export default categoriesSlice.reducer;

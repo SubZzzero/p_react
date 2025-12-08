@@ -1,20 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
+import { RootState } from "../store";
 
 export const fetchPizzas = createAsyncThunk(
     "pizzas/fetchPizzas",
     async (_, thunkAPI) => {
-        const filters = thunkAPI.getState().filters;
+        const state = thunkAPI.getState() as RootState;
+        const filters = state.filters;
         const { categories, activeCategory, sort, currentPage, search } = filters;
-        const URL = "https://690b168a6ad3beba00f368a7.mockapi.io/items?";
 
+        const URL = "https://690b168a6ad3beba00f368a7.mockapi.io/items?";
         const category = categories[activeCategory];
 
         const searchQuery =
-            category === "All" && search
-                ? `&search=${search}`
-                : "";
+            category === "All" && search ? `&search=${search}` : "";
 
         const apiUrl =
             category === "All"
@@ -26,17 +25,31 @@ export const fetchPizzas = createAsyncThunk(
     }
 );
 
+export type PizzasItems = {
+    id: string;
+    name: string
+    price: number;
+    imageUrl: string;
+    size: number[];
+    count: number;
+};
+
+interface PizzaSliceState {
+    items: PizzasItems[];
+    isLoading: boolean;
+    error: string | null;
+}
+
+const initialState: PizzaSliceState = {
+    items: [],
+    isLoading: false,
+    error: null,
+};
+
 const pizzasSlice = createSlice({
     name: "pizzas",
-
-    initialState: {
-        items: [],
-        isLoading: false,
-        error: null,
-    },
-
+    initialState,
     reducers: {},
-
     extraReducers: (builder) => {
         builder
             .addCase(fetchPizzas.pending, (state) => {
@@ -55,5 +68,7 @@ const pizzasSlice = createSlice({
             });
     },
 });
-export const selectPizzas = (state) => state.pizzas;
+
+export const selectPizzas = (state: RootState) => state.pizzas;
+
 export default pizzasSlice.reducer;

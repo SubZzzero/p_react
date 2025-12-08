@@ -1,4 +1,4 @@
-import React from "react";
+
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { IoMdTrash } from "react-icons/io";
@@ -14,9 +14,9 @@ import "../components/PagesCss/CartBlock.css";
 
 export default function Cart() {
     const dispatch = useDispatch();
-    //FIX ITEMS TPRICE
+
     const { items, totalPrice } = useSelector(selectCart);
-    const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);//need fix
+    const totalCount = items.reduce((sum, item) => sum + item.count, 0);
 
     if (items.length === 0) {
         return (
@@ -42,7 +42,7 @@ export default function Cart() {
                     </div>
 
 
-                    {items.map((item: any) => (
+                    {items.map((item) => (
                         <CartItem key={item.id} {...item} />
                     ))}
 

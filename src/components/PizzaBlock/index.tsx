@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addItem, selectCartItem } from "../../redux/slices/cartSlice";
 import "./PizzaBlock.css";
+import { RootState } from "../../redux/store";
 
 
 type PizzaBlockProperties = {
@@ -20,7 +21,17 @@ export default function PizzaBlock({ name, imageUrl, type, size, price, id, rati
     const [activeSize, setActiveSize] = useState(0);
 
     //FIX
-    const cartItem = useSelector(selectCartItem)
+    // const cartItem = useSelector((state: RootState) => selectCartItem(state, id));
+    const cartItem = useSelector((state: RootState) =>
+        selectCartItem(
+            state,
+            id,
+            type[activeType],
+            size[activeSize]
+        )
+    );
+
+
     const count = cartItem ? cartItem.count : 0;
 
     const dispatch = useDispatch()
@@ -31,8 +42,9 @@ export default function PizzaBlock({ name, imageUrl, type, size, price, id, rati
             name,
             imageUrl,
             price,
-            types: type[activeType],
-            sizes: size[activeSize]
+            type: type[activeType],
+            size: size[activeSize],
+            count: 1
         }
         dispatch(addItem(items))
     };
