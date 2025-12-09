@@ -36,7 +36,6 @@ function Search() {
         debouncedSetSearch.cancel();
     };
 
-
     return (
         <div>
             <div className="search-wrapper">

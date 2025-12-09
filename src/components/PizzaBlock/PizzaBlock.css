@@ -20,10 +20,16 @@
 }
 
 .pizza-block-rating {
-    background-color: #19e012;
+    background-color: #FFE135;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
     cursor: default;
-}
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .pizza-block-title {
     color: #333;

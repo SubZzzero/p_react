@@ -6,12 +6,11 @@
     height: 90px;
 }
 
-
 .button-cart {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 150px;
+    width: 200px;
     white-space: nowrap;
     color: white;
 }
@@ -31,6 +30,21 @@
 
 .button:hover {
     background-color: #f24701;
+}
+
+.button-price {
+    display: inline-block;
+
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+
+.button-item {
+    display: inline-block;
+
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+    margin-left: 15px;
 }
 
 .cart-ico {
