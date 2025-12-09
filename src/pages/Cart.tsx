@@ -33,7 +33,7 @@ export default function Cart() {
                             <p className="cart-total-pizzas">
                                 Total pizzas: {totalCount}
                             </p>
-                            <button onClick={() => dispatch(clearItems())} className="clear-cart-btn">
+                            <button onClick={() => dispatch(clearItems(),)} className="clear-cart-btn">
                                 <IoMdTrash />
                             </button>
                         </div>

@@ -34,7 +34,7 @@ export default function Home() {
             dispatch(setFilters({
                 activeCategory: Number(params.activeCategory),
                 currentPage: 1,
-                sort: sortingParams
+                sort: sortingParams,
             }));
         }
     }, [dispatch]);

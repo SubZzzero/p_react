@@ -19,9 +19,14 @@ export default function InfoPizza() {
 
 
     useEffect(() => {
+        if (!id) {
+            navigate("/");
+            return;
+        }
+
         async function fetchPizzas() {
             try {
-                const { data } = await axios.get(
+                const { data } = await axios.get<DataPizza>(
                     "https://690b168a6ad3beba00f368a7.mockapi.io/items/" + id
                 );
                 setItems(data)
