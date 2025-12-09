@@ -24,7 +24,7 @@ export default function Home() {
 
     const { items, isLoading } = useSelector(selectPizzas);
     const { categories, activeCategory, sort, currentPage, search } = useSelector(selectFilters);
-
+    console.log("Render")
 
     useEffect(() => {
         if (window.location.search) {
@@ -65,11 +65,10 @@ export default function Home() {
             activeCategory,
             sort,
             currentPage,
-            search
+            search,
         }));
     }, [activeCategory, categories, sort, currentPage, search, dispatch]);
 
-    //FIX
     const pizzaBlocks = items.map((obj) => (
         <PizzaBlock key={obj.id}
             id={obj.id}

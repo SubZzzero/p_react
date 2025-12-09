@@ -31,8 +31,8 @@ export default function CartItem({ id, name, price, imageUrl, type, size, count 
             </div>
 
             <div className="cart-item-count">
-                <button onClick={() => dispatch(decreaseItem({ id, type, size }))}>-</button>
-                <span>{count}</span>
+                <button disabled={count === 1} onClick={() => dispatch(decreaseItem({ id, type, size }))}>-</button>
+                <span className="cart-item-count-value">{count}</span>
                 <button onClick={() => dispatch(increaseItem({ id, type, size }))}>+</button>
             </div>
 

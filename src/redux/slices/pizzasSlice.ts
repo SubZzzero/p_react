@@ -3,6 +3,8 @@ import axios from "axios";
 import { RootState } from "../store";
 import { SortFeature } from "./filterSlice";
 
+
+
 export type FetchArgs = {
     categories: string[];
     activeCategory: number;

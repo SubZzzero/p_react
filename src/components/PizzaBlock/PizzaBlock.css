@@ -94,6 +94,11 @@
 
 .pizza-block-count {
     margin-left: 15px;
+    min-width: 35px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+    font-size: 16px;
+
 }
 
 .button {
