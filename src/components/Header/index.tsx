@@ -15,6 +15,9 @@ export default function Header() {
     const totalCount = items.reduce((sum, item) => sum + item.count, 0) //need fix
     const location = useLocation();
 
+    const hideSearch =
+        location.pathname === "/cart" ||
+        location.pathname.startsWith("/pizza/");
 
     return (
         <header
@@ -33,7 +36,7 @@ export default function Header() {
                             alt="logo" />
                     </Link>
 
-                    {location.pathname !== "/cart" && (
+                    {!hideSearch && (
                         <>
                             <Search />
 
