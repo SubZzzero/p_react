@@ -24,7 +24,6 @@ export default function Home() {
 
     const { items, isLoading } = useSelector(selectPizzas);
     const { categories, activeCategory, sort, currentPage, search } = useSelector(selectFilters);
-    console.log("Render")
 
     useEffect(() => {
         if (window.location.search) {
