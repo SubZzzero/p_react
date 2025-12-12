@@ -42,5 +42,3 @@ The project was developed for learning purposes and as part of a personal portfo
 - Node.js version 18 or higher
 - npm version 9 or higher
 - npm start
-- 
-- 
