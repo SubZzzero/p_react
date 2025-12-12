@@ -39,6 +39,6 @@ The project was developed for learning purposes and as part of a personal portfo
 - cd pizza_react
 - npm install
 - Make sure you have installed:
-- Node.js version 18 or higher
-- npm version 9 or higher
+-  Node.js version 18 or higher
+-  npm version 9 or higher
 - npm start
