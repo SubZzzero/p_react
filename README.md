@@ -20,7 +20,6 @@ The project was developed for learning purposes and as part of a personal portfo
 - Shopping cart
 - Cart persistence with redux-persist
 - Skeleton loading
-- Not Found page
 
 ## Tech Stack
 
