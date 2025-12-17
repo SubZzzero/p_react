@@ -1,7 +1,7 @@
 # Pizza App
 
 Educational frontend project built with React, TypeScript and Redux Toolkit.
-
+![Image alt](https://github.com/SubZzzero/p_react/blob/main/main_page.png)
 ## Description
 
 This is an educational single-page application created to practice modern frontend development with React and Redux Toolkit.
